@@ -4,3 +4,4 @@
 *.project
 *.settings
 tmp/
+Config/database.php
