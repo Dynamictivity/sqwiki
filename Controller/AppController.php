@@ -1,5 +1,6 @@
 <?php
 App::uses('Controller', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
@@ -22,6 +23,7 @@ class AppController extends Controller {
 			'loginRedirect' => array('controller' => 'users', 'action' => 'view', 'admin' => false, 'manage' => false)
 		),
 		'Paginator',
+		'SendGrid',
 		//'Secure',
 		//'Security'
 	);

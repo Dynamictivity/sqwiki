@@ -3,7 +3,7 @@
 	<head>
 		<?php echo $this->Html->charset(); ?>
 		<title>
-			<?php echo __('Sqwiki: the rapid wiki deployment system:'); ?>
+			<?php echo Configure::read('Sqwiki.title'); ?>
 			<?php echo $title_for_layout; ?>
 		</title>
 		<?php
@@ -26,7 +26,7 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1><?php echo $this->fetch('title'); ?></h1>
+				<h1><?php echo Configure::read('Sqwiki.title'); ?>: <?php echo $this->fetch('title'); ?></h1>
 			</div>
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>

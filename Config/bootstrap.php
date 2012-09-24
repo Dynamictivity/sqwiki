@@ -106,6 +106,7 @@ CakeLog::config('error', array(
 	'scopes' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
 /**
  * Load Plugins
  */
@@ -124,3 +125,13 @@ function yn($bool) {
 function pon($count) {
 	return ($count > 1 || $count == 0 || $count < 0 ? 's' : null);
 }
+
+/**
+ * Load Vendors
+ */
+App::import('Vendor', 'SendGrid/SmtpApiHeader');
+
+/**
+ * Load Custom Configuration Files
+ */
+Configure::load('SqwikiConfig');
