@@ -83,40 +83,12 @@ class ArticleRevision extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Revision' => array(
-			'className' => 'Revision',
-			'foreignKey' => 'revision_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
-	);
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'ArticleRevisionReview' => array(
-			'className' => 'ArticleRevisionReview',
-			'foreignKey' => 'article_revision_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
 		)
 	);
 

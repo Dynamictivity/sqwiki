@@ -48,9 +48,8 @@ class ArticleRevisionsController extends AppController {
 			}
 		}
 		$articles = $this->ArticleRevision->Article->find('list');
-		$revisions = $this->ArticleRevision->Revision->find('list');
 		$users = $this->ArticleRevision->User->find('list');
-		$this->set(compact('articles', 'revisions', 'users'));
+		$this->set(compact('articles', 'users'));
 	}
 
 /**
@@ -76,9 +75,8 @@ class ArticleRevisionsController extends AppController {
 			$this->request->data = $this->ArticleRevision->read(null, $id);
 		}
 		$articles = $this->ArticleRevision->Article->find('list');
-		$revisions = $this->ArticleRevision->Revision->find('list');
 		$users = $this->ArticleRevision->User->find('list');
-		$this->set(compact('articles', 'revisions', 'users'));
+		$this->set(compact('articles', 'users'));
 	}
 
 /**

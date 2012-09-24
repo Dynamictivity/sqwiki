@@ -38,6 +38,8 @@ class User extends AppModel {
 			),
 		),
 	);
+	
+	public $displayField = 'username';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -115,5 +117,46 @@ class User extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public function beforeSave() {
+		if (empty($this->data['User']['id'])) {
+			$this->data['User']['token'] = String::uuid();
+		}
+		if (!empty($this->data['User']['new_password'])) {
+			if ($this->data['User']['new_password'] !== $this->data['User']['confirm_password']) {
+				return;
+			}
+			$this->data['User']['password'] = $this->data['User']['new_password'];
+			unset($this->data['User']['new_password']);
+			unset($this->data['User']['confirm_password']);
+		}
+		if (!empty($this->data['User']['password'])) {
+			$this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
+		}
+		return true;
+	}
+	
+	public function saveNewUser($newUser, $returnExistingUser = true) {
+		if (empty($newUser['User'])) {
+			$newUser['User'] = $user;
+		}
+		$existingUser = $this->findByEmail($newUser['User']['email']);
+		if (!empty($existingUser['User']['email'])) {
+			if ($returnExistingUser) {
+				return $existingUser;
+			}
+			return false;
+		}
+		if (empty($newUser['User']['role_id'])) {
+			$newUser['User']['role_id'] = 3;
+		}
+		$this->create();
+		$this->save($newUser);
+		$newAccount = $this->findById($this->id);
+		if (empty($newAccount)) {
+			return false;
+		}
+		return $newAccount;
+	}
 
 }

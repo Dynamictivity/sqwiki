@@ -10,7 +10,7 @@
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
 				'sqwiki',
-				'jqueryui/ui-darkness/style.css',
+				'jqueryui/ui-redmond/style.css',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',
@@ -26,7 +26,7 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1><?php echo $this->Html->link(__('Sqwiki: the rapid wiki deployment system'), 'http://sqwiki.dynamictivity.com'); ?></h1>
+				<h1><?php echo $this->fetch('title'); ?></h1>
 			</div>
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>
