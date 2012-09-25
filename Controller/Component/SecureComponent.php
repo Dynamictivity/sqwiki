@@ -30,12 +30,18 @@ class SecureComponent extends Component {
 			 * Check prefix
 			 *		Make sure they have permission
 			 * Check role_id
-			 *		Log them out if they attempt to access admin
+			 *		Log them out if they attempt to access admin or mod
 			 */
 			switch (true){
 				// Admin
 				case ($Controller->params['prefix'] == 'admin') :
-					if ($roleId > '1') {
+					if ($roleId > 1) {
+						$Controller->redirect($Controller->Auth->logout());
+					}
+					break;
+				// Management
+				case ($Controller->params['prefix'] == 'manage') :
+					if ($roleId > 2) {
 						$Controller->redirect($Controller->Auth->logout());
 					}
 					break;
@@ -51,7 +57,7 @@ class SecureComponent extends Component {
 			// Only allow certain actions
 			$Controller->Auth->allow(array('login', 'logout', 'register'));
 		}
-		// Ensure that a moderator is accessing a modOnlyAction URL
+		// Ensure that a moderator/admin is accessing a modOnlyAction URL
 		$this->modOnlyActions = (array)$this->modOnlyActions;
 		if (!empty($this->modOnlyActions) && ($this->modOnlyActions[0] == '*' || in_array($Controller->request->action, $this->modOnlyActions))) {
 			$Controller->Session->setFlash(__('That action is restricted to moderators.'));

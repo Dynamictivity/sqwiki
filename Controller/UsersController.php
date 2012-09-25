@@ -100,4 +100,50 @@ class UsersController extends AppController {
 		$this->Session->setFlash(__('User was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
+/**
+ * register method
+ *
+ * @return void
+ */
+	public function register() {
+		if ($this->request->is('post')) {
+			$this->User->create();
+			if (($newUser = $this->User->saveNewUser($this->request->data, false))) {
+				$this->Session->setFlash(__('Welcome to %s', Configure::read('Sqwiki.title')));
+				CakeSession::write('Auth', $newUser);
+				$this->redirect(array('action' => 'view'));
+			} else {
+				$this->Session->setFlash(__('Your account could not be registered. Please, try again.'));
+			}
+		}
+	}
+
+/**
+ * login method
+ *
+ * @return void
+ */
+	public function login() {
+		if (AuthComponent::user('id')) {
+			$this->redirect(array('action' => 'view'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Auth->login()) {
+				$this->redirect($this->Auth->redirect());
+			} else {
+				$this->Session->setFlash(__('Username or password is incorrect.'), 'default', array(), 'auth');
+			}
+		}
+	}
+
+/**
+ * logout method
+ *
+ * @return void
+ */
+	public function logout() {
+		CakeSession::destroy();
+		$this->redirect($this->Auth->logout());
+	}
 }

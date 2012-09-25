@@ -4,6 +4,7 @@
  */
 $config = array(
 	'Sqwiki' => array(
-		'title' => 'Sqwiki: the rapid wiki deployment system'
+		'title' => 'Sqwiki',
+		'slogan' => 'the rapid wiki deployment system'
 	)
 );

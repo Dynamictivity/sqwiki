@@ -13,19 +13,21 @@ class AppController extends Controller {
 		'Session',
 		'DebugKit.Toolbar',
 		'Auth'=> array(
+		/*
 			'authenticate' => array(
 				'all' => array(
 					'scope' => array('User.role_id <=' => 3)
 				)
 			),
+		*/
 			'loginAction' => array('controller' => 'users', 'action' => 'login'),
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
-			'loginRedirect' => array('controller' => 'users', 'action' => 'view', 'admin' => false, 'manage' => false)
+			'loginRedirect' => array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)
 		),
 		'Paginator',
 		'SendGrid',
-		//'Secure',
-		//'Security'
+		'Secure',
+		'Security'
 	);
 	public $helpers = array(
 		'Html',
@@ -37,6 +39,6 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
 		// Temporary for dev
-		$this->Auth->allow('*');
+		//$this->Auth->allow('*');
 	}
 }

@@ -3,14 +3,14 @@
 	<head>
 		<?php echo $this->Html->charset(); ?>
 		<title>
-			<?php echo Configure::read('Sqwiki.title'); ?>
+			<?php echo Configure::read('Sqwiki.title'); ?>: <?php echo Configure::read('Sqwiki.slogan'); ?>: 
 			<?php echo $title_for_layout; ?>
 		</title>
 		<?php
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
 				'sqwiki',
-				'jqueryui/ui-redmond/style.css',
+				'jqueryui/humanity/style.css',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',
@@ -26,10 +26,11 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1><?php echo Configure::read('Sqwiki.title'); ?>: <?php echo $this->fetch('title'); ?></h1>
+				<h1><?php echo Configure::read('Sqwiki.title'); ?>: <?php echo Configure::read('Sqwiki.slogan'); ?>: <?php echo $this->fetch('title'); ?></h1>
 			</div>
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>
+				<?php echo $this->Session->flash('auth'); ?>
 				<?php echo $this->fetch('content'); ?>
 			</div>
 			<div id="footer">
