@@ -1,3 +1,5 @@
+<?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
+<?php $this->assign('title', __('View Achievement')); ?>
 <div class="achievements view">
 <h2><?php  echo __('Achievement'); ?></h2>
 	<dl>
@@ -32,13 +34,4 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Achievement'), array('action' => 'edit', $achievement['Achievement']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Achievement'), array('action' => 'delete', $achievement['Achievement']['id']), null, __('Are you sure you want to delete # %s?', $achievement['Achievement']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Achievements'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Achievement'), array('action' => 'add')); ?> </li>
-	</ul>
 </div>

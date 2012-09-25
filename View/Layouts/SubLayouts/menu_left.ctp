@@ -22,7 +22,6 @@
 			<li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Article Revision Reviews'), array('controller' => 'article_revision_reviews', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Articles'), array('controller' => 'articles', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Comments'), array('controller' => 'comments', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Achievements'), array('controller' => 'achievements', 'action' => 'index')); ?> </li>
 		</ul>
 	<?php endif; ?>
@@ -30,7 +29,7 @@
 		<h3><?php echo __('Moderation'); ?></h3>
 		<ul>
 			<li><?php echo $this->Html->link(__('Article Revision Queue'), array('controller' => 'article_revisions', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Comment Queue'), array('controller' => 'comments', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('Recent Comments'), array('controller' => 'comments', 'action' => 'index')); ?> </li>
 		</ul>
 	<?php endif; ?>
 	<h3><?php echo __('Account'); ?></h3>

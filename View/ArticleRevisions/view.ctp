@@ -1,3 +1,5 @@
+<?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
+<?php $this->assign('title', __('View Article Revision')); ?>
 <div class="articleRevisions view">
 <h2><?php  echo __('Article Revision'); ?></h2>
 	<dl>
@@ -42,17 +44,4 @@
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Article Revision'), array('action' => 'edit', $articleRevision['ArticleRevision']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Article Revision'), array('action' => 'delete', $articleRevision['ArticleRevision']['id']), null, __('Are you sure you want to delete # %s?', $articleRevision['ArticleRevision']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Article Revisions'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Article Revision'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Articles'), array('controller' => 'articles', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Article'), array('controller' => 'articles', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

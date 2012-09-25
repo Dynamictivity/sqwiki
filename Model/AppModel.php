@@ -9,6 +9,6 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 	//public $useDbConfig = 'production';
-	public $actsAs = array('Containable');
-	public $recursive = -1;
+	//public $actsAs = array('Containable');
+	//public $recursive = -1;
 }
