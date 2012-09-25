@@ -10,7 +10,7 @@
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
 				'sqwiki',
-				'jqueryui/humanity/style.css',
+				'jqueryui/eggplant/style.css',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',

@@ -25,7 +25,7 @@
 			<li><?php echo $this->Html->link(__('Achievements'), array('controller' => 'achievements', 'action' => 'index')); ?> </li>
 		</ul>
 	<?php endif; ?>
-	<?php if (AuthComponent::user('role_id') < 3) : ?>
+	<?php if (AuthComponent::user('role_id') == 2 || AuthComponent::user('role_id') == 1) : ?>
 		<h3><?php echo __('Moderation'); ?></h3>
 		<ul>
 			<li><?php echo $this->Html->link(__('Article Revision Queue'), array('controller' => 'article_revisions', 'action' => 'index')); ?> </li>
