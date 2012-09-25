@@ -64,19 +64,6 @@ class User extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ArticleRevisionReview' => array(
-			'className' => 'ArticleRevisionReview',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'ArticleRevision' => array(
 			'className' => 'ArticleRevision',
 			'foreignKey' => 'user_id',

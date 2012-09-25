@@ -8,23 +8,23 @@ App::uses('AppController', 'Controller');
 class AchievementsController extends AppController {
 
 /**
- * index method
+ * admin_index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Achievement->recursive = 0;
 		$this->set('achievements', $this->paginate());
 	}
 
 /**
- * view method
+ * admin_view method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		$this->Achievement->id = $id;
 		if (!$this->Achievement->exists()) {
 			throw new NotFoundException(__('Invalid achievement'));
@@ -33,11 +33,11 @@ class AchievementsController extends AppController {
 	}
 
 /**
- * add method
+ * admin_add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Achievement->create();
 			if ($this->Achievement->save($this->request->data)) {
@@ -50,13 +50,13 @@ class AchievementsController extends AppController {
 	}
 
 /**
- * edit method
+ * admin_edit method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		$this->Achievement->id = $id;
 		if (!$this->Achievement->exists()) {
 			throw new NotFoundException(__('Invalid achievement'));
@@ -74,14 +74,14 @@ class AchievementsController extends AppController {
 	}
 
 /**
- * delete method
+ * admin_delete method
  *
  * @throws MethodNotAllowedException
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}

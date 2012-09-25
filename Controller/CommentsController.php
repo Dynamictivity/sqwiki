@@ -8,23 +8,23 @@ App::uses('AppController', 'Controller');
 class CommentsController extends AppController {
 
 /**
- * index method
+ * admin_index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Comment->recursive = 0;
 		$this->set('comments', $this->paginate());
 	}
 
 /**
- * view method
+ * admin_view method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		$this->Comment->id = $id;
 		if (!$this->Comment->exists()) {
 			throw new NotFoundException(__('Invalid comment'));
@@ -33,11 +33,11 @@ class CommentsController extends AppController {
 	}
 
 /**
- * add method
+ * admin_add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Comment->create();
 			if ($this->Comment->save($this->request->data)) {
@@ -53,41 +53,14 @@ class CommentsController extends AppController {
 	}
 
 /**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		$this->Comment->id = $id;
-		if (!$this->Comment->exists()) {
-			throw new NotFoundException(__('Invalid comment'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Comment->save($this->request->data)) {
-				$this->Session->setFlash(__('The comment has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
-			}
-		} else {
-			$this->request->data = $this->Comment->read(null, $id);
-		}
-		$users = $this->Comment->User->find('list');
-		$articles = $this->Comment->Article->find('list');
-		$this->set(compact('users', 'articles'));
-	}
-
-/**
- * delete method
+ * admin_delete method
  *
  * @throws MethodNotAllowedException
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}

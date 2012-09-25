@@ -8,23 +8,23 @@ App::uses('AppController', 'Controller');
 class ArticleRevisionsController extends AppController {
 
 /**
- * index method
+ * admin_index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->ArticleRevision->recursive = 0;
 		$this->set('articleRevisions', $this->paginate());
 	}
 
 /**
- * view method
+ * admin_view method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		$this->ArticleRevision->id = $id;
 		if (!$this->ArticleRevision->exists()) {
 			throw new NotFoundException(__('Invalid article revision'));
@@ -33,11 +33,11 @@ class ArticleRevisionsController extends AppController {
 	}
 
 /**
- * add method
+ * admin_add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->ArticleRevision->create();
 			if ($this->ArticleRevision->save($this->request->data)) {

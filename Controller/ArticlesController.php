@@ -8,23 +8,23 @@ App::uses('AppController', 'Controller');
 class ArticlesController extends AppController {
 
 /**
- * index method
+ * admin_index method
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Article->recursive = 0;
 		$this->set('articles', $this->paginate());
 	}
 
 /**
- * view method
+ * admin_view method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		$this->Article->id = $id;
 		if (!$this->Article->exists()) {
 			throw new NotFoundException(__('Invalid article'));
@@ -33,11 +33,11 @@ class ArticlesController extends AppController {
 	}
 
 /**
- * add method
+ * admin_add method
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Article->create();
 			if ($this->Article->saveAssociated($this->request->data)) {
@@ -52,13 +52,13 @@ class ArticlesController extends AppController {
 	}
 
 /**
- * edit method
+ * admin_edit method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		$this->Article->id = $id;
 		if (!$this->Article->exists()) {
 			throw new NotFoundException(__('Invalid article'));
@@ -78,14 +78,14 @@ class ArticlesController extends AppController {
 	}
 
 /**
- * delete method
+ * admin_delete method
  *
  * @throws MethodNotAllowedException
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
