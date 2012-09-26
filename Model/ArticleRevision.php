@@ -10,7 +10,7 @@ App::uses('AppModel', 'Model');
  */
 class ArticleRevision extends AppModel {
 
-	public $actsAs = array('Ownable', 'Sequence' => array('group_fields' => 'article_id', 'order_field' => 'revision_id', 'start_at' => 1), 'Loggable');
+	public $actsAs = array('Ownable', 'Loggable');
 
 /**
  * Validation rules
@@ -21,56 +21,29 @@ class ArticleRevision extends AppModel {
 		'article_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'revision_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'summary' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'content' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);
-
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -81,19 +54,24 @@ class ArticleRevision extends AppModel {
 		'Article' => array(
 			'className' => 'Article',
 			'foreignKey' => 'article_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
+			'counterCache' => true
+		),
+		'ReviewedByUser' => array(
+			'className' => 'User',
+			'foreignKey' => 'reviewed_by_user_id',
 			'counterCache' => true
 		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
 			'counterCache' => true
 		)
 	);
+
+	public function afterSave($created) {
+		if ($created) {
+			$this->updateAll(array($this->alias . '.is_current' => false), array($this->alias . '.article_id' => $this->data[$this->alias]['article_id'], $this->alias . '.id <>' => $this->id));
+		}
+	}
 
 }

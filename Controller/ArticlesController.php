@@ -71,9 +71,8 @@ class ArticlesController extends AppController {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		} else {
-			$article = $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
+			$this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
 		}
-		$this->set(compact('article'));
 	}
 
 /**

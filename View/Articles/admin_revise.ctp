@@ -1,5 +1,9 @@
+<?php
+	// Set this variable into the view for the toolbar
+	$this->set('article', $this->request->data);
+?>
 <?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
-<?php $this->assign('title', $article['Article']['title']); ?>
+<?php $this->assign('title', $this->request->data['Article']['title']); ?>
 <div class="articles form">
 	<?php echo $this->Form->create('Article'); ?>
 		<fieldset>
