@@ -62,7 +62,8 @@ class Article extends AppModel {
 			'foreignKey' => 'user_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
+			'counterCache' => true
 		)
 	);
 

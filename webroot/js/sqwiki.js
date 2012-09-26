@@ -8,6 +8,6 @@ $(function() {
 	$('form input, form textarea, .select select').addClass('ui-widget ui-corner-all');
 	//$('table td.actions a').addClass('ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only');
 	$("table td.actions a, .button, .submit input").button();
-	$("textarea").markItUp(mySettings);
+	$("textarea").markItUp(markitupSettings);
 
 }); 
