@@ -31,24 +31,4 @@ class ArticleRevisionsController extends AppController {
 		}
 		$this->set('articleRevision', $this->ArticleRevision->read(null, $id));
 	}
-
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->ArticleRevision->create();
-			if ($this->ArticleRevision->save($this->request->data)) {
-				$this->Session->setFlash(__('The article revision has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The article revision could not be saved. Please, try again.'));
-			}
-		}
-		$articles = $this->ArticleRevision->Article->find('list');
-		$users = $this->ArticleRevision->User->find('list');
-		$this->set(compact('articles', 'users'));
-	}
 }

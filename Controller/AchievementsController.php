@@ -18,21 +18,6 @@ class AchievementsController extends AppController {
 	}
 
 /**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		$this->Achievement->id = $id;
-		if (!$this->Achievement->exists()) {
-			throw new NotFoundException(__('Invalid achievement'));
-		}
-		$this->set('achievement', $this->Achievement->read(null, $id));
-	}
-
-/**
  * admin_add method
  *
  * @return void

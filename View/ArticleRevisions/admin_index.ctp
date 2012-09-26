@@ -8,8 +8,6 @@
 			<th><?php echo $this->Paginator->sort('article_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('revision_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('summary'); ?></th>
-			<th><?php echo $this->Paginator->sort('content'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('updated'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -25,8 +23,6 @@
 				<td>
 					<?php echo $this->Html->link($articleRevision['User']['id'], array('controller' => 'users', 'action' => 'view', $articleRevision['User']['id'])); ?>
 				</td>
-				<td><?php echo h($articleRevision['ArticleRevision']['summary']); ?>&nbsp;</td>
-				<td><?php echo h($articleRevision['ArticleRevision']['content']); ?>&nbsp;</td>
 				<td><?php echo h($articleRevision['ArticleRevision']['created']); ?>&nbsp;</td>
 				<td><?php echo h($articleRevision['ArticleRevision']['updated']); ?>&nbsp;</td>
 				<td class="actions">
@@ -37,5 +33,4 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
-	<div class="right button"><?php echo $this->Html->link(__('New Article Revision'), array('action' => 'add')); ?></div>
 </div>

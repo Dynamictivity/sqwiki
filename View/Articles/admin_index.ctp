@@ -27,7 +27,9 @@
 				<td><?php echo h($article['Article']['updated']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $article['Article']['id'])); ?>
-					<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $article['Article']['id'])); ?>
+					<?php echo $this->Html->link(__('Revise'), array('action' => 'revise', $article['Article']['id'])); ?>
+					<?php echo $this->Html->link(__('History'), array('action' => 'history', $article['Article']['id'])); ?>
+					<?php echo $this->Html->link(__('Talk'), array('controller' => 'comments', 'action' => 'index', $article['Article']['id'])); ?>
 					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $article['Article']['id']), null, __('Are you sure you want to delete # %s?', $article['Article']['id'])); ?>
 				</td>
 			</tr>

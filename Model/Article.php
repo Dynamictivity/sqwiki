@@ -9,7 +9,7 @@ App::uses('AppModel', 'Model');
  */
 class Article extends AppModel {
 
-	public $actsAs = array('Article', 'Ownable', 'Sluggable' => array('slug_separator' => '_', 'lowercase' => false), 'Loggable');
+	public $actsAs = array('Containable', 'Article', 'Ownable', 'Sluggable' => array('slug_separator' => '_', 'lowercase' => false), 'Loggable');
 
 /**
  * Validation rules
@@ -20,36 +20,9 @@ class Article extends AppModel {
 		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'slug' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);
-
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -60,9 +33,6 @@ class Article extends AppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
 			'counterCache' => true
 		)
 	);
@@ -76,29 +46,40 @@ class Article extends AppModel {
 		'ArticleRevision' => array(
 			'className' => 'ArticleRevision',
 			'foreignKey' => 'article_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'dependent' => true
 		),
 		'Comment' => array(
 			'className' => 'Comment',
 			'foreignKey' => 'article_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
+			'dependent' => true
 		)
 	);
+
+	public function getCurrentVersion($id, $options = array()) {
+		$options = array_merge(
+			array(
+				'merge' => true
+			),
+			$options
+		);
+		$article = $this->find('first',
+			array(
+				'contain' => array(
+					'ArticleRevision' => array(
+						'conditions' => array(
+							'is_current' => true
+						)
+					)
+				)
+			)
+		);
+		if (!empty($article['ArticleRevision'][0])) {
+			if ($options['merge']) {
+				$article['ArticleRevision'] = $article['ArticleRevision'][0];
+			}
+			return $article;
+		}
+		return false;
+	}
 
 }

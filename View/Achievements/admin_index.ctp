@@ -22,7 +22,6 @@
 				<td><?php echo h($achievement['Achievement']['created']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['updated']); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $achievement['Achievement']['id'])); ?>
 					<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $achievement['Achievement']['id'])); ?>
 					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $achievement['Achievement']['id']), null, __('Are you sure you want to delete # %s?', $achievement['Achievement']['id'])); ?>
 				</td>

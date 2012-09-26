@@ -29,7 +29,7 @@ class ArticlesController extends AppController {
 		if (!$this->Article->exists()) {
 			throw new NotFoundException(__('Invalid article'));
 		}
-		$this->set('article', $this->Article->read(null, $id));
+		$this->set('article', $this->Article->getCurrentVersion($id));
 	}
 
 /**
@@ -52,29 +52,28 @@ class ArticlesController extends AppController {
 	}
 
 /**
- * admin_edit method
+ * admin_revise method
  *
  * @throws NotFoundException
  * @param string $id
  * @return void
  */
-	public function admin_edit($id = null) {
+	public function admin_revise($id = null) {
 		$this->Article->id = $id;
 		if (!$this->Article->exists()) {
 			throw new NotFoundException(__('Invalid article'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Article->save($this->request->data)) {
+			if ($this->Article->saveAssociated($this->request->data)) {
 				$this->Session->setFlash(__('The article has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		} else {
-			$this->request->data = $this->Article->read(null, $id);
+			$article = $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
 		}
-		$users = $this->Article->User->find('list');
-		$this->set(compact('users'));
+		$this->set(compact('article'));
 	}
 
 /**
