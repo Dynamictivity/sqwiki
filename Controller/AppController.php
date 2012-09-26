@@ -20,8 +20,8 @@ class AppController extends Controller {
 				)
 			),
 		*/
-			'loginAction' => array('controller' => 'users', 'action' => 'login'),
-			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+			'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false),
+			'logoutRedirect' => array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false),
 			'loginRedirect' => array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)
 		),
 		'Paginator',
