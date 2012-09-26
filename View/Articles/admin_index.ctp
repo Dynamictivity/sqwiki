@@ -1,7 +1,6 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
-<?php $this->assign('title', __('Articles Index')); ?>
+<?php $this->assign('title', __('Articles')); ?>
 <div class="articles index">
-	<h2><?php echo __('Articles'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -23,14 +22,12 @@
 					<?php echo $this->Html->link($article['User']['id'], array('controller' => 'users', 'action' => 'view', $article['User']['id'])); ?>
 				</td>
 				<td><?php echo h($article['Article']['article_revision_count']); ?>&nbsp;</td>
-				<td><?php echo h($article['Article']['created']); ?>&nbsp;</td>
-				<td><?php echo h($article['Article']['updated']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($article['Article']['updated']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $article['Article']['id'])); ?>
-					<?php echo $this->Html->link(__('Revise'), array('action' => 'revise', $article['Article']['id'])); ?>
 					<?php echo $this->Html->link(__('History'), array('action' => 'history', $article['Article']['id'])); ?>
 					<?php echo $this->Html->link(__('Talk'), array('controller' => 'comments', 'action' => 'index', $article['Article']['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $article['Article']['id']), null, __('Are you sure you want to delete # %s?', $article['Article']['id'])); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

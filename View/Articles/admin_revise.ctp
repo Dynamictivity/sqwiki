@@ -3,11 +3,11 @@
 	$this->set('article', $this->request->data);
 ?>
 <?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
-<?php $this->assign('title', $this->request->data['Article']['title']); ?>
+<?php $this->assign('title', __('Revise Article')); ?>
 <div class="articles form">
 	<?php echo $this->Form->create('Article'); ?>
 		<fieldset>
-			<legend><?php echo __('Revise Article'); ?></legend>
+			<legend><?php echo $this->request->data['Article']['title']; ?></legend>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title');

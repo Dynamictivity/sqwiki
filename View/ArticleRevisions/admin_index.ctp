@@ -1,7 +1,9 @@
-<?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
-<?php $this->assign('title', __('Article Revisions Index')); ?>
+<?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
+<?php $this->assign('title', __('Revision History')); ?>
 <div class="articleRevisions index">
-	<h2><?php echo __('Article Revisions'); ?></h2>
+	<?php if (empty($article)) : ?>
+		<h2><?php echo __('All Article Revisions'); ?></h2>
+	<?php endif; ?>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -26,7 +28,7 @@
 					<?php echo $this->Html->link($articleRevision['ReviewedByUser']['username'], array('controller' => 'users', 'action' => 'view', $articleRevision['ReviewedByUser']['id'])); ?>
 				</td>
 				<td><?php echo yn($articleRevision['ArticleRevision']['is_active']); ?>&nbsp;</td>
-				<td><?php echo h($articleRevision['ArticleRevision']['created']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($articleRevision['ArticleRevision']['created']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $articleRevision['ArticleRevision']['id'])); ?>
 				</td>

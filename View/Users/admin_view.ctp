@@ -13,19 +13,9 @@
 			<?php echo h($user['User']['username']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ip Address'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['ip_address']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Email'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['email']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Password'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['password']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Role'); ?></dt>
@@ -51,11 +41,6 @@
 		<dt><?php echo __('Comment Count'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['comment_count']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Article Revision Review Count'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['article_revision_review_count']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

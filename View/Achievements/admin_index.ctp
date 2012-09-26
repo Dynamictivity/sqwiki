@@ -1,7 +1,7 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
-<?php $this->assign('title', __('Achievements Index')); ?>
+<?php $this->assign('title', __('Achievements')); ?>
 <div class="achievements index">
-	<h2><?php echo __('Achievements'); ?></h2>
+	<h2><?php echo __('All Achievements'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -19,11 +19,11 @@
 				<td><?php echo h($achievement['Achievement']['name']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['user_field']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['user_field_count']); ?>&nbsp;</td>
-				<td><?php echo h($achievement['Achievement']['created']); ?>&nbsp;</td>
-				<td><?php echo h($achievement['Achievement']['updated']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($achievement['Achievement']['created']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($achievement['Achievement']['updated']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $achievement['Achievement']['id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $achievement['Achievement']['id']), null, __('Are you sure you want to delete # %s?', $achievement['Achievement']['id'])); ?>
+					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $achievement['Achievement']['id']), array('class' => 'ui-state-error'), __('Are you sure you want to delete # %s?', $achievement['Achievement']['id'])); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

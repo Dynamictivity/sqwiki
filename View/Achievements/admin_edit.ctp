@@ -3,7 +3,7 @@
 <div class="achievements form">
 	<?php echo $this->Form->create('Achievement'); ?>
 		<fieldset>
-			<legend><?php echo __('Edit Achievement'); ?></legend>
+			<legend><?php echo __('Achievement Details'); ?></legend>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('name');
