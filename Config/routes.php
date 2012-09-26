@@ -25,11 +25,21 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
+	Router::connectNamed(array('slug'));
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+/**
+ * Sqwiki routes
+ */
+	Router::connect('/article/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
+	Router::connect('/article/:slug/revision/add', array('controller' => 'article_revisions', 'action' => 'add'), array('persist' => array('slug')));
+	Router::connect('/article/:slug/revision/set/:id', array('controller' => 'article_revisions', 'action' => 'set_current'), array('persist' => array('slug')));
+	Router::connect('/article/:slug/history', array('controller' => 'article_revisions', 'action' => 'index'), array('persist' => array('slug')));
+	Router::connect('/article/:slug/talk', array('controller' => 'comments', 'action' => 'index'), array('persist' => array('slug')));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
