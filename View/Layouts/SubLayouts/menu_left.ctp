@@ -37,7 +37,7 @@
 	<ul>
 		<?php if (!AuthComponent::user()) : ?>
 			<li><?php echo $this->Html->link(__('Login'), array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false)); ?> </li>
-			<li><?php echo $this->Html->link(__('Register'), array('controller' => 'users', 'action' => 'register', 'admin' => false, 'manage' => false)); ?> </li>
+			<li class="strike"><?php echo $this->Html->link(__('Register'), array('controller' => 'users', 'action' => 'register', 'admin' => false, 'manage' => false)); ?> </li>
 		<?php else : ?>
 			<li class="strike"><?php echo $this->Html->link(__('Account'), array('controller' => 'users', 'action' => 'edit', 'admin' => false, 'manage' => false)); ?> </li>
 			<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout', 'admin' => false, 'manage' => false)); ?> </li>
