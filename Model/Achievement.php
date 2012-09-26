@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  */
 class Achievement extends AppModel {
 
+	public $actsAs = array('Loggable');
+
 /**
  * Validation rules
  *

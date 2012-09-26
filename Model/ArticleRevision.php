@@ -10,7 +10,7 @@ App::uses('AppModel', 'Model');
  */
 class ArticleRevision extends AppModel {
 
-	public $actsAs = array('Ownable', 'Sequence' => array('group_fields' => 'article_id', 'order_field' => 'revision_id', 'start_at' => 1));
+	public $actsAs = array('Ownable', 'Sequence' => array('group_fields' => 'article_id', 'order_field' => 'revision_id', 'start_at' => 1), 'Loggable');
 
 /**
  * Validation rules
