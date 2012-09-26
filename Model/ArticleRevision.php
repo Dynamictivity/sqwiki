@@ -68,10 +68,12 @@ class ArticleRevision extends AppModel {
 		)
 	);
 
-	public function afterSave($created) {
-		if ($created) {
-			$this->updateAll(array($this->alias . '.is_current' => false), array($this->alias . '.article_id' => $this->data[$this->alias]['article_id'], $this->alias . '.id <>' => $this->id));
-		}
+	public function approve($approved = true) {
+		$articleRevisionData = array(
+			'reviewed_by_user_id' => AuthComponent::user('id'),
+			'is_active' => $approved
+		);
+		return $this->save($articleRevisionData);
 	}
 
 }

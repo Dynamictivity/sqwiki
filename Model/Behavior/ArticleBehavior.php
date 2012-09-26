@@ -3,7 +3,6 @@ class ArticleBehavior extends ModelBehavior {
 
 	public function beforeValidate(Model $Model) {
 		$Model->data[$Model->alias]['title'] = ucwords($Model->data[$Model->alias]['title']);
-		$Model->data[$Model->ArticleRevision->alias][0]['is_current'] = true;
 		$duplicateCount = $Model->ArticleRevision->find('count',
 			array(
 				'conditions' => array(

@@ -67,9 +67,13 @@ class Article extends AppModel {
 				'contain' => array(
 					'ArticleRevision' => array(
 						'conditions' => array(
-							'is_current' => true
-						)
+							'is_active' => true
+						),
+						'order' => 'ArticleRevision.id DESC'
 					)
+				),
+				'conditions' => array(
+					'Article.id' => $id
 				)
 			)
 		);
