@@ -111,7 +111,6 @@ CakeLog::config('error', array(
  * Load Plugins
  */
 CakePlugin::load('DebugKit');
-
 /**
  * Custom Global Functions
  */

@@ -9,13 +9,16 @@
 		<?php
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
+				'jqueryui/eggplant/style',
+				'../js/markitup/skins/markitup/style',
+				'../js/markitup/sets/markdown/style',
 				'sqwiki',
-				'jqueryui/eggplant/style.css',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',
 				'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js',
 				'markitup/jquery.markitup',
+				'markitup/sets/markdown/set',
 				'sqwiki',
 			), array('inline' => false));
 			echo $this->fetch('meta');

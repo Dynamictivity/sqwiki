@@ -35,6 +35,7 @@ class AppController extends Controller {
 		'Session',
 		'Time',
 		'Gravatar',
+		'Markdown',
 	);
 
 	public function beforeFilter() {

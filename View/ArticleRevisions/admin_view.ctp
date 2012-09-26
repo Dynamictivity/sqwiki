@@ -30,7 +30,7 @@
 		</dd>
 		<dt><?php echo __('Content'); ?></dt>
 		<dd>
-			<?php echo h($articleRevision['ArticleRevision']['content']); ?>
+			<?php echo $this->Markdown->parse($articleRevision['ArticleRevision']['content']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
