@@ -7,16 +7,14 @@
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('username');
-				echo $this->Form->input('ip_address');
 				echo $this->Form->input('email');
-						echo $this->Form->input('new_password');
-						echo $this->Form->input('confirm_password');
+				echo $this->Form->input('new_password');
+				echo $this->Form->input('confirm_password');
 				echo $this->Form->input('role_id');
 				echo $this->Form->input('token');
 				echo $this->Form->input('article_count');
 				echo $this->Form->input('article_revision_count');
 				echo $this->Form->input('comment_count');
-				echo $this->Form->input('article_revision_review_count');
 			?>
 		</fieldset>
 	<?php echo $this->Form->end(__('Submit')); ?>
