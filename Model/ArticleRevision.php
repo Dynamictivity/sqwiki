@@ -76,4 +76,19 @@ class ArticleRevision extends AppModel {
 		return $this->save($articleRevisionData);
 	}
 
+	public function getPreviousActiveRevision() {
+		$currentArticleId = $this->field('article_id');
+		$previousArticleRevision = $this->find('first',
+			array(
+				'conditions' => array(
+					'ArticleRevision.article_id' => $currentArticleId,
+					'ArticleRevision.is_active' => true,
+					'ArticleRevision.id <' => $this->id
+				),
+				'order' => 'ArticleRevision.id DESC'
+			)
+		);
+		return $previousArticleRevision;
+	}
+
 }

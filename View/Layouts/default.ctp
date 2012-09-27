@@ -12,6 +12,7 @@
 				'jqueryui/eggplant/style',
 				'../js/markitup/skins/markitup/style',
 				'../js/markitup/sets/markdown/style',
+				'php-diff/style',
 				'sqwiki',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
