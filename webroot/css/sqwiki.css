@@ -25,6 +25,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 #container #content .strike {
 	text-decoration: line-through;
 }
+.articles.view ul, .articleRevisions.view ul, .articles.view ol, .articleRevisions.view ol {
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	margin-left: 25px;
+}
+
+.articles.view blockquote, .articleRevisions.view blockquote {
+	font-style: italic;
+	margin-left: 50px;
+}
 
 /** General Style Info **/
 body {

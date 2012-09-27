@@ -1,6 +1,6 @@
 <?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
 <?php $this->assign('title', __('View Article')); ?>
-<div class="articleRevisions view">
+<div class="articles view">
 	<h1><?php echo h($article['Article']['title']); ?></h1>
 	<p><?php echo h($article['ArticleRevision']['summary']); ?></p>
 	<hr />
