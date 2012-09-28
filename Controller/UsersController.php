@@ -29,7 +29,7 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$this->set('user', $this->User->read(null, $id));
+		$this->redirect(array('action' => 'edit', $id));
 	}
 
 /**

@@ -44,10 +44,6 @@ class Comment extends AppModel {
 			'foreignKey' => 'user_id',
 			'counterCache' => true
 		),
-		'ReviewedByUser' => array(
-			'className' => 'User',
-			'foreignKey' => 'reviewed_by_user_id'
-		),
 		'Article' => array(
 			'className' => 'Article',
 			'foreignKey' => 'article_id',

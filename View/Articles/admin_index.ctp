@@ -23,7 +23,7 @@
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['updated']); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $article['Article']['id'])); ?>
+					<?php echo $this->Html->link(__('Article'), array('action' => 'view', $article['Article']['id'])); ?>
 					<?php echo $this->Html->link(__('History'), array('action' => 'history', $article['Article']['id'])); ?>
 					<?php echo $this->Html->link(__('Talk'), array('action' => 'talk', $article['Article']['id'])); ?>
 				</td>

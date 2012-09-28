@@ -13,7 +13,18 @@ class ArticleRevisionsController extends AppController {
  * @return void
  */
 	public function admin_index() {
+		$this->ArticleRevision->recursive = 0;
+		$this->set('articleRevisions', $this->paginate());
+	}
+
+/**
+ * admin_history method
+ *
+ * @return void
+ */
+	public function admin_history() {
 		if (!empty($this->params['named']['article_id'])) {
+			$this->ArticleRevision->Article->id = $this->params['named']['article_id'];
 			$this->paginate = array(
 				'conditions' => array(
 					'article_id' => $this->params['named']['article_id']
@@ -22,8 +33,12 @@ class ArticleRevisionsController extends AppController {
 			$article['Article']['id'] = $this->params['named']['article_id'];
 			$this->Set(compact('article'));
 		}
+		if (!$this->ArticleRevision->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
 		$this->ArticleRevision->recursive = 0;
 		$this->set('articleRevisions', $this->paginate());
+		$this->render('admin_index');
 	}
 
 /**

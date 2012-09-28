@@ -1,6 +1,6 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
 <div class="article-toolbar right">
-	<?php echo $this->Html->link(__('View Article'), array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'])); ?>
+	<?php echo $this->Html->link(__('Article'), array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'])); ?>
 	<?php echo $this->Html->link(__('History'), array('controller' => 'articles', 'action' => 'history', $articleRevision['Article']['id'])); ?>
 	<?php if (empty($articleRevision['ReviewedByUser']['id'])) : ?>
 		<?php echo $this->Html->link(__('Approve'), array('action' => 'approve', $articleRevision['ArticleRevision']['id']), array('class' => 'ui-state-highlight')); ?>

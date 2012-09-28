@@ -87,7 +87,7 @@ class ArticlesController extends AppController {
  * @return void
  */
 	public function admin_history($id = null) {
-		$this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
+		$this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
 	}
 
 /**
