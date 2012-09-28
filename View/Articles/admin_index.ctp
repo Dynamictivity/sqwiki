@@ -16,7 +16,7 @@
 				<td><?php echo h($article['Article']['title']); ?>&nbsp;</td>
 				<td><?php echo h($article['Article']['slug']); ?>&nbsp;</td>
 				<td>
-					<?php echo $this->Html->link($article['User']['id'], array('controller' => 'users', 'action' => 'view', $article['User']['id'])); ?>
+					<?php echo $this->Html->link($article['User']['username'], array('controller' => 'users', 'action' => 'view', $article['User']['id'])); ?>
 				</td>
 				<td><?php echo h($article['Article']['article_revision_count']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>

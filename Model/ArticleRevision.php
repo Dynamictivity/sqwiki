@@ -58,8 +58,7 @@ class ArticleRevision extends AppModel {
 		),
 		'ReviewedByUser' => array(
 			'className' => 'User',
-			'foreignKey' => 'reviewed_by_user_id',
-			'counterCache' => true
+			'foreignKey' => 'reviewed_by_user_id'
 		),
 		'User' => array(
 			'className' => 'User',
