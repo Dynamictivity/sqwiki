@@ -25,7 +25,7 @@
 			<li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
 		</ul>
 	<?php endif; ?>
-	<?php if (AuthComponent::user('role_id') == 2 || AuthComponent::user('role_id') == 1) : ?>
+	<?php if (AuthComponent::user('role_id') < 3) : ?>
 		<h3><?php echo __('Moderation'); ?></h3>
 		<ul>
 			<li><?php echo $this->Html->link(__('Articles'), array('controller' => 'articles', 'action' => 'index', 'admin' => false, 'manage' => true)); ?> </li>

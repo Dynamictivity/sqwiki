@@ -8,8 +8,8 @@
 				echo $this->Form->input('id');
 				echo $this->Form->input('username');
 				echo $this->Form->input('email');
-				echo $this->Form->input('new_password');
-				echo $this->Form->input('confirm_password');
+				echo $this->Form->input('new_password', array('type' => 'password'));
+				echo $this->Form->input('confirm_password', array('type' => 'password'));
 				echo $this->Form->input('role_id');
 			?>
 		</fieldset>
