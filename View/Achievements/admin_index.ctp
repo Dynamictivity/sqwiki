@@ -4,7 +4,6 @@
 	<h2><?php echo __('All Achievements'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_field'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_field_count'); ?></th>
@@ -15,7 +14,6 @@
 		<?php
 		foreach ($achievements as $achievement): ?>
 			<tr>
-				<td><?php echo h($achievement['Achievement']['id']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['name']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['user_field']); ?>&nbsp;</td>
 				<td><?php echo h($achievement['Achievement']['user_field_count']); ?>&nbsp;</td>

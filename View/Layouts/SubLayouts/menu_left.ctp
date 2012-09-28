@@ -22,7 +22,7 @@
 			<li><?php echo $this->Html->link(__('Achievements'), array('controller' => 'achievements', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
 			<li><?php echo $this->Html->link(__('Articles'), array('controller' => 'articles', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
 			<li><?php echo $this->Html->link(__('Article Revisions'), array('controller' => 'article_revisions', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
-			<li class="strike"><?php echo $this->Html->link(__('Comments'), array('controller' => 'comments', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
+			<li><?php echo $this->Html->link(__('Comments'), array('controller' => 'comments', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
 			<li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
 		</ul>
 	<?php endif; ?>

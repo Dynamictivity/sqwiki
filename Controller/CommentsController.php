@@ -18,6 +18,29 @@ class CommentsController extends AppController {
 	}
 
 /**
+ * admin_talk method
+ *
+ * @return void
+ */
+	public function admin_talk() {
+		if (!empty($this->params['named']['article_id'])) {
+			$this->Comment->Article->id = $this->params['named']['article_id'];
+			$this->paginate = array(
+				'conditions' => array(
+					'article_id' => $this->params['named']['article_id']
+				)
+			);
+			$article['Article']['id'] = $this->params['named']['article_id'];
+			$this->Set(compact('article'));
+		}
+		if (!$this->Comment->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$this->Comment->recursive = 0;
+		$this->set('comments', $this->paginate());
+	}
+
+/**
  * admin_view method
  *
  * @throws NotFoundException
@@ -38,18 +61,26 @@ class CommentsController extends AppController {
  * @return void
  */
 	public function admin_add() {
+		if (!empty($this->params['named']['article_id'])) {
+			$this->paginate = array(
+				'conditions' => array(
+					'article_id' => $this->params['named']['article_id']
+				)
+			);
+			$article['Article']['id'] = $this->params['named']['article_id'];
+			$this->Set(compact('article'));
+		} else {
+			throw new NotFoundException(__('Invalid article'));
+		}
 		if ($this->request->is('post')) {
 			$this->Comment->create();
 			if ($this->Comment->save($this->request->data)) {
 				$this->Session->setFlash(__('The comment has been saved'));
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'talk', 'article_id' => $this->params['named']['article_id']));
 			} else {
 				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Comment->User->find('list');
-		$articles = $this->Comment->Article->find('list');
-		$this->set(compact('users', 'articles'));
 	}
 
 /**

@@ -5,8 +5,7 @@
 		<fieldset>
 			<legend><?php echo __('Add Comment'); ?></legend>
 			<?php
-				echo $this->Form->input('user_id');
-				echo $this->Form->input('article_id');
+				echo $this->Form->hidden('article_id', array('value' => $article['Article']['id']));
 				echo $this->Form->input('comment');
 			?>
 		</fieldset>

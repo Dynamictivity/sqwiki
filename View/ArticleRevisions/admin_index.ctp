@@ -6,7 +6,6 @@
 	<?php endif; ?>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('article_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('reviewed_by_user_id'); ?></th>
@@ -17,7 +16,6 @@
 		<?php
 		foreach ($articleRevisions as $articleRevision): ?>
 			<tr>
-				<td><?php echo h($articleRevision['ArticleRevision']['id']); ?>&nbsp;</td>
 				<td>
 					<?php echo $this->Html->link($articleRevision['Article']['title'], array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'])); ?>
 				</td>

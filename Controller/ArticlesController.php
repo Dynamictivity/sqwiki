@@ -26,8 +26,10 @@ class ArticlesController extends AppController {
  */
 	public function admin_view($id = null) {
 		$this->Article->id = $id;
-		if (!$this->Article->exists()) {
-			throw new NotFoundException(__('Invalid article'));
+		if (!$this->Article->exists() || $this->request->is('post')) {
+			$this->Session->setFlash(__('The article does not exist yet'));
+			$this->admin_add();
+			return $this->render('admin_add');
 		}
 		$article = $this->Article->getCurrentVersion($id);
 		if (!$article) {
@@ -52,8 +54,6 @@ class ArticlesController extends AppController {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Article->User->find('list');
-		$this->set(compact('users'));
 	}
 
 /**
@@ -83,12 +83,21 @@ class ArticlesController extends AppController {
 /**
  * admin_history method
  *
- * @throws NotFoundException
  * @param string $id
  * @return void
  */
 	public function admin_history($id = null) {
 		$this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
+	}
+
+/**
+ * admin_comments method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function admin_talk($id = null) {
+		$this->redirect(array('controller' => 'comments', 'action' => 'talk', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
 	}
 
 /**

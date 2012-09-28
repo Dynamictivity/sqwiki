@@ -48,40 +48,30 @@ class ArticleRevisionsController extends AppController {
  *
  * @throws NotFoundException
  * @param string $id
+ * @param bool $id
  * @return void
  */
-	public function admin_approve($id = null) {
+	public function admin_approve($id = null, $approve = true) {
 		$this->ArticleRevision->id = $id;
 		if (!$this->ArticleRevision->exists()) {
 			throw new NotFoundException(__('Invalid article revision'));
 		}
-		if ($this->ArticleRevision->approve()) {
-			$this->Session->setFlash(__('The article revision has been approved'));
+		if ($this->ArticleRevision->approve($approve)) {
+			$this->Session->setFlash(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
 		} else {
-			$this->Session->setFlash(__('The article revision has not been approved due to an error'));
+			$this->Session->setFlash(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
 		}
-		$articleId = $this->ArticleRevision->field('article_id');
-		$this->redirect(array('controller' => 'articles', 'action' => 'view', $articleId));
+		$this->redirect(array('controller' => 'articles', 'action' => 'view', $this->ArticleRevision->field('article_id')));
 	}
 
 /**
  * admin_reject method
+ * wrapper for admin_approve with reject flag
  *
- * @throws NotFoundException
  * @param string $id
  * @return void
  */
 	public function admin_reject($id = null) {
-		$this->ArticleRevision->id = $id;
-		if (!$this->ArticleRevision->exists()) {
-			throw new NotFoundException(__('Invalid article revision'));
-		}
-		if ($this->ArticleRevision->approve(false)) {
-			$this->Session->setFlash(__('The article revision has been rejected'));
-		} else {
-			$this->Session->setFlash(__('The article revision has not been rejected due to an error'));
-		}
-		$articleId = $this->ArticleRevision->field('article_id');
-		$this->redirect(array('controller' => 'articles', 'action' => 'view', $articleId));
+		$this->admin_approve($id, false);
 	}
 }

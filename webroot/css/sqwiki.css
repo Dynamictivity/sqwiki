@@ -30,10 +30,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	margin-top: 0.5em;
 	margin-left: 25px;
 }
-
 .articles.view blockquote, .articleRevisions.view blockquote {
 	font-style: italic;
 	margin-left: 50px;
+}
+.comment .comment-user-info {
+	border-bottom: 1px solid #666;
+	border-top: 1px solid #666;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.comment .comment-body {
+	padding: 1em;
 }
 
 /** General Style Info **/
