@@ -33,4 +33,5 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
+	<div class="right button"><?php echo $this->Html->link(__('New Revision'), array('controller' => 'articles', 'action' => 'revise', $article['Article']['id'])); ?></div>
 </div>
