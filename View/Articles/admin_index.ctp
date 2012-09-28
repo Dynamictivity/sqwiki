@@ -8,6 +8,7 @@
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('article_revision_count'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
+			<th><?php echo $this->Paginator->sort('updated'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 		</tr>
 		<?php
@@ -20,6 +21,7 @@
 				</td>
 				<td><?php echo h($article['Article']['article_revision_count']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>
+				<td><?php echo $this->Time->timeAgoInWords($article['Article']['updated']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $article['Article']['id'])); ?>
 					<?php echo $this->Html->link(__('History'), array('action' => 'history', $article['Article']['id'])); ?>
