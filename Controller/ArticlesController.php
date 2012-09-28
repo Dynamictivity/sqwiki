@@ -20,12 +20,20 @@ class ArticlesController extends AppController {
 /**
  * manage_view method
  *
- * @throws NotFoundException
  * @param string $id
  * @return void
  */
 	public function manage_view($id = null) {
 		$this->admin_view($id);
+	}
+
+/**
+ * manage_add method
+ *
+ * @return void
+ */
+	public function manage_add() {
+		$this->admin_add();
 	}
 
 /**
@@ -72,7 +80,6 @@ class ArticlesController extends AppController {
 /**
  * admin_view method
  *
- * @throws NotFoundException
  * @param string $id
  * @return void
  */
