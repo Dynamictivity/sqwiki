@@ -8,8 +8,6 @@
 				echo $this->Form->input('Article.title');
 				echo $this->Form->input('ArticleRevision.0.summary');
 				echo $this->Form->input('ArticleRevision.0.content');
-				echo $this->Form->hidden('ArticleRevision.0.revision_id', array('value' => 1));
-				echo $this->Form->hidden('ArticleRevision.0.is_active', array('value' => 1));
 			?>
 		</fieldset>
 	<?php echo $this->Form->end(__('Submit')); ?>
