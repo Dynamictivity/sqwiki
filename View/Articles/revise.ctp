@@ -2,7 +2,7 @@
 	// Set this variable into the view for the toolbar
 	$this->set('article', $this->request->data);
 ?>
-<?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
+<?php $this->extend('/Layouts/SubLayouts/article_toolbar'); ?>
 <?php $this->assign('title', __('Revise Article')); ?>
 <div class="articles form">
 	<?php echo $this->Form->create('Article'); ?>

@@ -8,6 +8,58 @@ App::uses('AppController', 'Controller');
 class ArticlesController extends AppController {
 
 /**
+ * manage_index method
+ *
+ * @return void
+ */
+	public function manage_index() {
+		$this->Article->recursive = 0;
+		$this->set('articles', $this->paginate());
+	}
+
+/**
+ * manage_view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function manage_view($id = null) {
+		$this->admin_view($id);
+	}
+
+/**
+ * manage_revise method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function manage_revise($id = null) {
+		$this->admin_revise($id);
+	}
+
+/**
+ * manage_history method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function manage_history($id = null) {
+		$this->admin_history($id);
+	}
+
+/**
+ * manage_talk method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function manage_talk($id = null) {
+		$this->admin_talk($id);
+	}
+
+/**
  * admin_index method
  *
  * @return void
@@ -37,6 +89,7 @@ class ArticlesController extends AppController {
 			$this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
 		}
 		$this->set(compact('article'));
+		$this->render('view');
 	}
 
 /**
@@ -54,6 +107,7 @@ class ArticlesController extends AppController {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		}
+		$this->render('add');
 	}
 
 /**
@@ -78,6 +132,7 @@ class ArticlesController extends AppController {
 		} else {
 			$this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
 		}
+		$this->render('revise');
 	}
 
 /**

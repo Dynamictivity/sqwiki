@@ -1,4 +1,4 @@
-<?php $this->extend('/Layouts/SubLayouts/admin_revision_toolbar'); ?>
+<?php $this->extend('/Layouts/SubLayouts/revision_toolbar'); ?>
 <?php $this->assign('title', __('View Revision')); ?>
 <div class="articleRevisions view">
 	<h1><?php echo h($articleRevision['Article']['title']); ?></h1>

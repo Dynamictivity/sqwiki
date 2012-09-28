@@ -8,11 +8,29 @@ App::uses('AppController', 'Controller');
 class CommentsController extends AppController {
 
 /**
- * admin_index method
+ * manage_talk method
  *
  * @return void
  */
-	public function admin_index() {
+	public function manage_talk() {
+		$this->admin_talk();
+	}
+
+/**
+ * manage_add method
+ *
+ * @return void
+ */
+	public function manage_add() {
+		$this->admin_add();
+	}
+
+/**
+ * manage_index method
+ *
+ * @return void
+ */
+	public function manage_index() {
 		$this->Comment->recursive = 0;
 		$this->set('comments', $this->paginate());
 	}
@@ -41,21 +59,6 @@ class CommentsController extends AppController {
 	}
 
 /**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		$this->Comment->id = $id;
-		if (!$this->Comment->exists()) {
-			throw new NotFoundException(__('Invalid comment'));
-		}
-		$this->set('comment', $this->Comment->read(null, $id));
-	}
-
-/**
  * admin_add method
  *
  * @return void
@@ -81,29 +84,6 @@ class CommentsController extends AppController {
 				$this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
 			}
 		}
-	}
-
-/**
- * admin_delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Comment->id = $id;
-		if (!$this->Comment->exists()) {
-			throw new NotFoundException(__('Invalid comment'));
-		}
-		if ($this->Comment->delete()) {
-			$this->Session->setFlash(__('Comment deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Comment was not deleted'));
-		$this->redirect(array('action' => 'index'));
+		$this->Render('add');
 	}
 }

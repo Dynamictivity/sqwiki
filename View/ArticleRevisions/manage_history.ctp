@@ -1,8 +1,8 @@
-<?php $this->extend('/Layouts/SubLayouts/admin_article_toolbar'); ?>
+<?php $this->extend('/Layouts/SubLayouts/article_toolbar'); ?>
 <?php $this->assign('title', __('Revision History')); ?>
 <div class="articleRevisions index">
 	<?php if (empty($article)) : ?>
-		<h2><?php echo __('All Article Revisions'); ?></h2>
+		<h2><?php echo __('Article Revisions'); ?></h2>
 	<?php endif; ?>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
@@ -20,10 +20,10 @@
 					<?php echo $this->Html->link($articleRevision['Article']['title'], array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'])); ?>
 				</td>
 				<td>
-					<?php echo $this->Html->link($articleRevision['User']['username'], array('controller' => 'users', 'action' => 'view', $articleRevision['User']['id'])); ?>
+					<?php echo h($articleRevision['User']['username']); ?>
 				</td>
 				<td>
-					<?php echo $this->Html->link($articleRevision['ReviewedByUser']['username'], array('controller' => 'users', 'action' => 'view', $articleRevision['ReviewedByUser']['id'])); ?>
+					<?php echo h($articleRevision['ReviewedByUser']['username']); ?>
 				</td>
 				<td><?php echo yn($articleRevision['ArticleRevision']['is_active']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($articleRevision['ArticleRevision']['created']); ?>&nbsp;</td>

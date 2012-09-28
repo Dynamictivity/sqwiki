@@ -1,7 +1,7 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
-<?php $this->assign('title', __('Comments')); ?>
+<?php $this->assign('title', __('Recent Talk')); ?>
 <div class="comments index">
-	<h2><?php echo __('All Comments'); ?></h2>
+	<h2><?php echo __('Comments'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
@@ -13,7 +13,7 @@
 		foreach ($comments as $comment): ?>
 			<tr>
 				<td>
-					<?php echo $this->Html->link($comment['User']['username'], array('controller' => 'users', 'action' => 'view', $comment['User']['id'])); ?>
+					<?php echo h($comment['User']['username']); ?>
 				</td>
 				<td>
 					<?php echo $this->Html->link($comment['Article']['title'], array('controller' => 'articles', 'action' => 'view', $comment['Article']['id'])); ?>
