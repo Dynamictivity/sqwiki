@@ -1,10 +1,10 @@
 <?php
 App::uses('AppHelper', 'View/Helper');
-App::import('Vendor', 'php-diff/Lib/Diff');
-App::import('Vendor', 'php-diff/Lib/Diff/Renderer/Html/Inline');
-App::import('Vendor', 'php-diff/Lib/Diff/Renderer/Html/SideBySide');
-App::import('Vendor', 'php-diff/Lib/Diff/Renderer/Text/Unified');
-App::import('Vendor', 'php-diff/Lib/Diff/Renderer/Text/Context');
+App::import('Vendor', 'php-diff/lib/Diff');
+App::import('Vendor', 'php-diff/lib/Diff/Renderer/Html/Inline');
+App::import('Vendor', 'php-diff/lib/Diff/Renderer/Html/SideBySide');
+App::import('Vendor', 'php-diff/lib/Diff/Renderer/Text/Unified');
+App::import('Vendor', 'php-diff/lib/Diff/Renderer/Text/Context');
 
 class DiffHelper extends AppHelper {
 	//public $helpers = array('Html');
