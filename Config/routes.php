@@ -45,6 +45,8 @@
 	Router::connect('/:slug/talk', array('controller' => 'articles', 'action' => 'talk'), array('persist' => array('slug')));
 	Router::connect('/:slug/talk/add', array('controller' => 'comments', 'action' => 'add'), array('persist' => array('slug')));
 	Router::connect('/:slug/talk/*', array('controller' => 'comments', 'action' => 'talk'), array('persist' => array('slug')));
+	Router::connect('/history', array('controller' => 'article_revisions', 'action' => 'index'));
+	Router::connect('/history/*', array('controller' => 'article_revisions', 'action' => 'index'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on

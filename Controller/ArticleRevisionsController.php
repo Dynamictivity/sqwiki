@@ -8,6 +8,17 @@ App::uses('AppController', 'Controller');
 class ArticleRevisionsController extends AppController {
 
 /**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->ArticleRevision->recursive = 0;
+		$this->set('articleRevisions', $this->paginate());
+		$this->render('history');
+	}
+
+/**
  * history method
  *
  * @return void

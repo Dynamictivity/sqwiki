@@ -33,5 +33,7 @@
 			</tr>
 		<?php endforeach; ?>
 	</table>
-	<div class="right button"><?php echo $this->Html->link(__('New Revision'), array('controller' => 'articles', 'action' => 'revise', 'slug' => $this->request->params['slug'])); ?></div>
+	<?php if (!empty($this->request->params['slug'])) : ?>
+		<div class="right button"><?php echo $this->Html->link(__('New Revision'), array('controller' => 'articles', 'action' => 'revise', 'slug' => $this->request->params['slug'])); ?></div>
+	<?php endif; ?>
 </div>
