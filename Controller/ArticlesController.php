@@ -8,13 +8,21 @@ App::uses('AppController', 'Controller');
 class ArticlesController extends AppController {
 
 /**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->admin_index();
+	}
+
+/**
  * manage_index method
  *
  * @return void
  */
 	public function manage_index() {
-		$this->Article->recursive = 0;
-		$this->set('articles', $this->paginate());
+		$this->admin_index();
 	}
 
 /**

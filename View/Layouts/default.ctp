@@ -7,9 +7,12 @@
 			<?php echo $title_for_layout; ?>
 		</title>
 		<?php
+			if (!CakeSession::check('UiTheme.activeTheme')) {
+				CakeSession::write('UiTheme.activeTheme', Configure::read('Sqwiki.default_theme'));
+			}
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
-				'jqueryui/eggplant/style',
+				'jqueryui/' . CakeSession::read('UiTheme.activeTheme') . '/style',
 				'../js/markitup/skins/markitup/style',
 				'../js/markitup/sets/markdown/style',
 				'php-diff/style',

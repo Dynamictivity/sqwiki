@@ -22,7 +22,7 @@ class AppController extends Controller {
 		*/
 			'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false),
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false),
-			'loginRedirect' => array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)
+			'loginRedirect' => array('controller' => 'articles', 'action' => 'index', 'admin' => false, 'manage' => false)
 		),
 		'Paginator',
 		'SendGrid',
@@ -37,6 +37,7 @@ class AppController extends Controller {
 		'Gravatar',
 		'Markdown',
 		'Diff',
+		'UiTheme',
 	);
 
 	public function beforeFilter() {
