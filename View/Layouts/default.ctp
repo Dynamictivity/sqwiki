@@ -50,4 +50,5 @@
 			</div>
 		</div>
 	</body>
+	<?php echo $this->element('analytics'); ?>
 </html>
