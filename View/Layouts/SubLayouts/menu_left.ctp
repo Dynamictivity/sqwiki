@@ -10,11 +10,11 @@
 <div class="actions">
 	<h3><?php echo __('%s Navigation', Configure::read('Sqwiki.title')); ?></h3>
 	<ul>
-		<li class="strike"><?php echo $this->Html->link(__('Main Page'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li>
+		<li><?php echo $this->Html->link(__('Main Page'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false)); ?> </li>
 		<li class="strike"><?php echo $this->Html->link(__('Browse Categories'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li>
-		<li class="strike"><?php echo $this->Html->link(__('Community Portal'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li>
+		<li><?php echo $this->Html->link(__('Community Portal'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Portal', 'admin' => false, 'manage' => false)); ?> </li>
 		<li class="strike"><?php echo $this->Html->link(__('Recent Changes'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li>
-		<li class="strike"><?php echo $this->Html->link(__('Support'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li>
+		<li><?php echo $this->Html->link(__('Support'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Support', 'admin' => false, 'manage' => false)); ?> </li>
 	</ul>
 	<?php if (AuthComponent::user('role_id') == 1) : ?>
 		<h3><?php echo __('Administration'); ?></h3>

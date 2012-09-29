@@ -26,7 +26,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connectNamed(array('slug'));
-	Router::connect('/', array('controller' => 'articles', 'action' => 'index'));
+	Router::connect('/', array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
@@ -35,11 +35,16 @@
 /**
  * Sqwiki routes
  */
-	Router::connect('/article/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
-	Router::connect('/article/:slug/revision/add', array('controller' => 'article_revisions', 'action' => 'add'), array('persist' => array('slug')));
-	Router::connect('/article/:slug/revision/set/:id', array('controller' => 'article_revisions', 'action' => 'set_current'), array('persist' => array('slug')));
-	Router::connect('/article/:slug/history', array('controller' => 'article_revisions', 'action' => 'index'), array('persist' => array('slug')));
-	Router::connect('/article/:slug/talk', array('controller' => 'comments', 'action' => 'index'), array('persist' => array('slug')));
+	Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
+	Router::connect('/:slug/revision/add', array('controller' => 'articles', 'action' => 'revise'), array('persist' => array('slug')));
+	Router::connect('/:slug/revision/view/:id', array('controller' => 'article_revisions', 'action' => 'view'), array('persist' => array('slug')));
+	//Router::connect('/:slug/revision/activate/:id', array('controller' => 'article_revisions', 'action' => 'activate'), array('persist' => array('slug')));
+	//Router::connect('/:slug/revision/deactivate/:id', array('controller' => 'article_revisions', 'action' => 'deactivate'), array('persist' => array('slug')));
+	Router::connect('/:slug/history', array('controller' => 'articles', 'action' => 'history'), array('persist' => array('slug')));
+	Router::connect('/:slug/history/*', array('controller' => 'article_revisions', 'action' => 'history'), array('persist' => array('slug')));
+	Router::connect('/:slug/talk', array('controller' => 'articles', 'action' => 'talk'), array('persist' => array('slug')));
+	Router::connect('/:slug/talk/add', array('controller' => 'comments', 'action' => 'add'), array('persist' => array('slug')));
+	Router::connect('/:slug/talk/*', array('controller' => 'comments', 'action' => 'talk'), array('persist' => array('slug')));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on

@@ -76,6 +76,18 @@ class SluggableBehavior extends ModelBehavior
 		
 		return true;
 	}
+
+	public function slugToId(&$model, $slug) {
+		$record = $model->find('first',
+			array(
+				'conditions' => array(
+					$model->alias . '.slug' => $slug
+				),
+				'fields' => array('id')
+			)
+		);
+		return $record[$model->alias]['id'];
+	}
 	
 	/**
 	 * Check if the *loaded* model data already contains a slug

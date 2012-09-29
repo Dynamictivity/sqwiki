@@ -46,7 +46,7 @@ class SecureComponent extends Component {
 					}
 					break;
 				// Banned/Deleted
-				case ($roleId == 3) :
+				case ($roleId == 4) :
 					// Log them out
 					if ($Controller->params['action'] != 'logout') {
 						$Controller->redirect($Controller->Auth->logout());

@@ -1,4 +1,4 @@
-<?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
+<?php $this->extend('/Layouts/SubLayouts/article_toolbar'); ?>
 <?php $this->assign('title', __('Add Comment')); ?>
 <div class="comments form">
 	<?php echo $this->Form->create('Comment'); ?>

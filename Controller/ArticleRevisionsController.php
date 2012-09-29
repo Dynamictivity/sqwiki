@@ -8,6 +8,39 @@ App::uses('AppController', 'Controller');
 class ArticleRevisionsController extends AppController {
 
 /**
+ * history method
+ *
+ * @return void
+ */
+	public function history() {
+		if (!empty($this->request->params['slug'])) {
+			$id = $this->ArticleRevision->Article->slugToId($this->request->params['slug']);
+			$this->ArticleRevision->Article->id = $id;
+			$this->paginate = array(
+				'conditions' => array(
+					'article_id' => $id
+				)
+			);
+		}
+		if (!$this->ArticleRevision->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$this->ArticleRevision->recursive = 0;
+		$this->set('articleRevisions', $this->paginate());
+	}
+
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function view() {
+		$this->admin_view($this->request->params['id']);
+	}
+
+/**
  * manage_review_queue method
  *
  * @return void
@@ -92,14 +125,14 @@ class ArticleRevisionsController extends AppController {
  * @return void
  */
 	public function admin_history() {
-		if (!empty($this->params['named']['article_id'])) {
-			$this->ArticleRevision->Article->id = $this->params['named']['article_id'];
+		if (!empty($this->request->params['named']['article_id'])) {
+			$this->ArticleRevision->Article->id = $this->request->params['named']['article_id'];
 			$this->paginate = array(
 				'conditions' => array(
-					'article_id' => $this->params['named']['article_id']
+					'article_id' => $this->request->params['named']['article_id']
 				)
 			);
-			$article['Article']['id'] = $this->params['named']['article_id'];
+			$article['Article']['id'] = $this->request->params['named']['article_id'];
 			$this->Set(compact('article'));
 		}
 		if (!$this->ArticleRevision->Article->exists()) {

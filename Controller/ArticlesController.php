@@ -17,6 +17,116 @@ class ArticlesController extends AppController {
 	}
 
 /**
+ * view method
+ *
+ * @return void
+ */
+	public function view() {
+		if (empty($this->request->params['slug'])) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$slug = $this->request->params['slug'];
+		$id = $this->Article->slugToId($slug);
+		$this->Article->id = $id;
+		if (!$this->Article->exists() || $this->request->is('post')) {
+			$this->Session->setFlash(__('The article does not exist yet'));
+			$this->add();
+			return $this->render('add');
+		}
+		$article = $this->Article->getCurrentVersion($id);
+		if (!$article) {
+			$this->Session->setFlash(__('The article has no active revisions'));
+			$this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
+		}
+		$this->set(compact('article'));
+		$this->render('view');
+	}
+
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->Article->create();
+			if ($this->Article->saveAssociated($this->request->data)) {
+				$this->Session->setFlash(__('The article has been saved'));
+				$this->redirect(array('action' => 'view', 'slug' => $this->Article->field('slug')));
+			} else {
+				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+			}
+		}
+		$this->request->data['Article']['title'] = ucwords(Inflector::humanize(str_replace('__', '_', Inflector::underscore($this->request->params['slug']))));
+	}
+
+/**
+ * revise method
+ *
+ * @throws NotFoundException
+ * @return void
+ */
+	public function revise() {
+		if (empty($this->request->params['slug'])) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$slug = $this->request->params['slug'];
+		$id = $this->Article->slugToId($slug);
+		$this->Article->id = $id;
+		if (!$this->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Article->saveAssociated($this->request->data)) {
+				$this->Session->setFlash(__('The article has been saved'));
+				$this->redirect(array('action' => 'view', 'slug' => $slug));
+			} else {
+				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+			}
+		} else {
+			$this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
+		}
+		$this->render('revise');
+	}
+
+/**
+ * history method
+ *
+ * @return void
+ */
+	public function history() {
+		if (empty($this->request->params['slug'])) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$slug = $this->request->params['slug'];
+		$id = $this->Article->slugToId($slug);
+		$this->Article->id = $id;
+		if (!$this->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
+	}
+
+/**
+ * talk method
+ *
+ * @param string $id
+ * @return void
+ */
+	public function talk($id = null) {
+		if (empty($this->request->params['slug'])) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$slug = $this->request->params['slug'];
+		$id = $this->Article->slugToId($slug);
+		$this->Article->id = $id;
+		if (!$this->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
+		$this->redirect(array('controller' => 'comments', 'action' => 'talk', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
+	}
+
+/**
  * manage_index method
  *
  * @return void
@@ -122,6 +232,9 @@ class ArticlesController extends AppController {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		}
+		if (!empty($this->request->params['slug'])) {
+			$this->request->data['Article']['title'] = ucwords(Inflector::humanize(Inflector::underscore($this->request->params['slug'])));
+		}
 		$this->render('add');
 	}
 
@@ -157,16 +270,24 @@ class ArticlesController extends AppController {
  * @return void
  */
 	public function admin_history($id = null) {
+		$this->Article->id = $id;
+		if (!$this->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
 		$this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
 	}
 
 /**
- * admin_comments method
+ * admin_talk method
  *
  * @param string $id
  * @return void
  */
 	public function admin_talk($id = null) {
+		$this->Article->id = $id;
+		if (!$this->Article->exists()) {
+			throw new NotFoundException(__('Invalid article'));
+		}
 		$this->redirect(array('controller' => 'comments', 'action' => 'talk', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
 	}
 
