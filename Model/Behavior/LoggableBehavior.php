@@ -2,9 +2,13 @@
 class LoggableBehavior extends ModelBehavior {
 
 	public function afterSave(Model $Model, $created) {
+		$userId = 1;
+		if (AuthComponent::user('id')) {
+			$userId = AuthComponent::user('id');
+		}
 		$logData = array(
-			'user_id' => AuthComponent::user('id'),
-			'ip_address' => $Model->data[$Model->alias]['ip_address'] = $_SERVER['SERVER_ADDR'],
+			'user_id' => $userId,
+			'ip_address' => $Model->data[$Model->alias]['ip_address'] = $_SERVER['REMOTE_ADDR'],
 			'action' => ($created ? 'created' : 'updated'),
 			'model' => $Model->alias,
 			'record_id' => $Model->id
@@ -15,9 +19,13 @@ class LoggableBehavior extends ModelBehavior {
 	}
 
 	public function beforeDelete(Model $Model) {
+		$userId = 1;
+		if (AuthComponent::user('id')) {
+			$userId = AuthComponent::user('id');
+		}
 		$logData = array(
-			'user_id' => AuthComponent::user('id'),
-			'ip_address' => $Model->data[$Model->alias]['ip_address'] = $_SERVER['SERVER_ADDR'],
+			'user_id' => $userId,
+			'ip_address' => $Model->data[$Model->alias]['ip_address'] = $_SERVER['REMOTE_ADDR'],
 			'action' => 'deleted',
 			'model' => $Model->alias,
 			'record_id' => $Model->id

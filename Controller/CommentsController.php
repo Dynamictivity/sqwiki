@@ -7,6 +7,18 @@ App::uses('AppController', 'Controller');
  */
 class CommentsController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		switch (AuthComponent::user('role_id')) {
+			case '2':
+				$this->Auth->allow(array('manage_talk', 'manage_add', 'manage_index'));
+			case '3':
+				$this->Auth->allow(array('add'));
+			default:
+				$this->Auth->allow(array('talk'));
+		}
+	}
+
 /**
  * talk method
  *

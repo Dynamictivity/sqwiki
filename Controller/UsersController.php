@@ -7,6 +7,14 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		switch (AuthComponent::user('role_id')) {
+			default:
+				$this->Auth->allow(array('register', 'login', 'logout'));
+		}
+	}
+
 /**
  * admin_index method
  *

@@ -24,8 +24,12 @@ class SecureComponent extends Component {
 			if (empty($roleId) || $roleId > 3) {
 				$Controller->redirect($Controller->Auth->logout());
 			}
-			// Allow global access to logged-in user
-			$Controller->Auth->allow(array('*'));
+			// Deny global access to logged-in user
+			$Controller->Auth->deny(array('*'));
+			if ($roleId == 1) {
+				// Grant full access to admin users
+				$Controller->Auth->allow(array('*'));
+			}
 			/**
 			 * Check prefix
 			 *		Make sure they have permission
@@ -53,32 +57,6 @@ class SecureComponent extends Component {
 					}
 					break;
 			}
-		} else {
-			// Only allow certain actions
-			$Controller->Auth->allow(array('login', 'logout', 'register'));
-		}
-		// Ensure that a moderator/admin is accessing a modOnlyAction URL
-		$this->modOnlyActions = (array)$this->modOnlyActions;
-		if (!empty($this->modOnlyActions) && ($this->modOnlyActions[0] == '*' || in_array($Controller->request->action, $this->modOnlyActions))) {
-			$Controller->Session->setFlash(__('That action is restricted to moderators.'));
-			$Controller->redirect(array('controller' => 'articles', 'action' => 'index', 'manage' => false));
-		}
-	}
-
-	public function checkExistsAndOwnership($valueToCompare = null, $fieldToCheck = 'user_id', $recordId = null, $modelToCheck = null) {
-		if (!$modelToCheck) {
-			$modelToCheck = $this->__Controller->{$this->__Controller->modelClass};
-		}
-		if (!$recordId) {
-			$recordId = $this->__Controller->{$this->__Controller->modelClass}->id;
-		} else {
-			$modelToCheck->id = $recordId;
-		}
-		if (!$valueToCompare) {
-			$valueToCompare = AuthComponent::user('id');
-		}
-		if (!$modelToCheck->exists() || $modelToCheck->field($fieldToCheck) != $valueToCompare) {
-			throw new NotFoundException(__('That') . ' ' . strtolower(Inflector::humanize(Inflector::underscore($modelToCheck->name))) . ' ' . __('does not exist.'));
 		}
 	}
 

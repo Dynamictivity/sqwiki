@@ -7,6 +7,16 @@ App::uses('AppController', 'Controller');
  */
 class ArticlesController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		switch (AuthComponent::user('role_id')) {
+			case '2':
+				$this->Auth->allow(array('manage_index', 'manage_view', 'manage_add', 'manage_revise', 'manage_history', 'manage_talk'));
+			default:
+				$this->Auth->allow(array('index', 'view', 'add', 'revise', 'history', 'talk'));
+		}
+	}
+
 /**
  * index method
  *

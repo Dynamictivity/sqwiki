@@ -7,6 +7,16 @@ App::uses('AppController', 'Controller');
  */
 class ArticleRevisionsController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		switch (AuthComponent::user('role_id')) {
+			case '2':
+				$this->Auth->allow(array('manage_review_queue', 'manage_history', 'manage_view', 'manage_approve', 'manage_reject'));
+			default:
+				$this->Auth->allow(array('index', 'history', 'view'));
+		}
+	}
+
 /**
  * index method
  *

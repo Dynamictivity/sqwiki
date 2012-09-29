@@ -7,6 +7,14 @@ App::uses('AppController', 'Controller');
  */
 class ThemesController extends AppController {
 
+	public function beforeFilter() {
+		parent::beforeFilter();
+		switch (AuthComponent::user('role_id')) {
+			default:
+				$this->Auth->allow(array('*'));
+		}
+	}
+
 	public function set_theme() {
 		if (empty($this->request->data['Theme']['selected'])) {
 			throw new NotFoundException(__('Invalid theme'));
