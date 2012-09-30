@@ -116,7 +116,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function confirm($token = null) {
-		if ((!$token || !($user = $this->User->findByToken($token))) && (!$this->request->is('post') && !$this->request->is('put'))) {
+		if (!$token || ($user = $this->User->findByToken($token))) {
 			throw new NotFoundException(__('Invalid token'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
