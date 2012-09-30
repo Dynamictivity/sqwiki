@@ -89,7 +89,7 @@ class UsersController extends AppController {
 			if ($this->User->save($user)) {
 				$email = $this->SendGrid->sendEmail(
 					array(
-						'to' => array($user['User']['email'] => $user['User']['name']),
+						'to' => array($user['User']['email'] => $user['User']['username']),
 						'subject' => __('%s Account Reset', Configure::read('Sqwiki.title')),
 						'category' => 'account_reset',
 						'template' => 'account_reset',
@@ -123,7 +123,7 @@ class UsersController extends AppController {
 			// Generate new token
 			$this->request->data['User']['token'] = String::uuid();
 			$this->request->data['User']['is_confirmed'] = true;
-			if ($this->User->save($this->request->data, false)) {
+			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The account has been confirmed'));
 				// Load the user into memory
 				$user = $this->User->read();
