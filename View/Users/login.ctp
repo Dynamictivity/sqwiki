@@ -10,4 +10,7 @@
 			?>
 		</fieldset>
 	<?php echo $this->Form->end(__('Login')); ?>
+	<p>
+		<?php echo $this->Html->link(__('Forgot Password'), array('controller' => 'users', 'action' => 'forgot')); ?>
+	</p>
 </div>
