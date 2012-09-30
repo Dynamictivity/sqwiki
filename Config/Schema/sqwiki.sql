@@ -1,17 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.0
+-- version 3.4.7.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 30, 2012 at 10:13 AM
--- Server version: 5.5.27
--- PHP Version: 5.3.16
+-- Generation Time: Sep 30, 2012 at 03:23 AM
+-- Server version: 5.5.24
+-- PHP Version: 5.3.10-1ubuntu3.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `sqwiki_dev`
+-- Database: `sqwiki`
 --
 
 -- --------------------------------------------------------
@@ -49,7 +49,16 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `title`, `slug`, `user_id`, `ip_address`, `article_revision_count`, `comment_count`, `created`, `updated`) VALUES
+(1, 'Main', 'Main', 1, '127.0.0.1', 1, NULL, '2012-09-30 00:00:00', '2012-09-30 00:00:00'),
+(2, 'Portal', 'Portal', 1, '127.0.0.1', 1, NULL, '2012-09-30 00:00:00', '2012-09-30 00:00:00'),
+(3, 'Support', 'Support', 1, '127.0.0.1', 1, NULL, '2012-09-30 00:00:00', '2012-09-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -70,7 +79,16 @@ CREATE TABLE IF NOT EXISTS `article_revisions` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `article_revisions`
+--
+
+INSERT INTO `article_revisions` (`id`, `article_id`, `user_id`, `ip_address`, `summary`, `content`, `is_active`, `reviewed_by_user_id`, `created`, `updated`) VALUES
+(1, 1, 1, '127.0.0.1', 'Welcome to Sqwiki, the squeaky clean wiki!', 'Sqwiki''s goal is to be the easiest wiki software in the world to use.', 1, 1, '2012-09-30 00:00:00', '2012-09-30 00:00:00'),
+(2, 2, 1, '127.0.0.1', 'This is the community portal.', 'Put resources here relevant to your wiki community.', 1, 1, '2012-09-30 00:00:00', '2012-09-30 00:00:00'),
+(3, 3, 1, '127.0.0.1', 'This is the support page.', 'Put information on this page that assists your users in using your wiki.', 1, 1, '2012-09-30 00:00:00', '2012-09-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -157,4 +175,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role_id`, `token`, `article_count`, `article_revision_count`, `comment_count`, `created`, `updated`) VALUES
-(1, 'Anonymous', 'support@dynamictivity.com', NULL, 4, NULL, 0, 0, 0, NULL, NULL);
+(1, 'Anonymous', 'support@dynamictivity.com', NULL, 4, NULL, 3, 3, 0, '2012-09-30 00:00:00', '2012-09-30 00:00:00');
