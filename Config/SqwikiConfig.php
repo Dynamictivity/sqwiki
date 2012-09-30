@@ -9,6 +9,7 @@ $config = array(
 		'auto_activate_pending_revisions' => true,
 		'allow_user_theme_switching' => true,
 		'default_theme' => 'redmond',
-		'google-analytics-id' => 'UA-35196234-1'
+		'google-analytics-id' => 'UA-35196234-1',
+		'url' => 'http://sqwiki.dynamictivity.com'
 	)
 );
