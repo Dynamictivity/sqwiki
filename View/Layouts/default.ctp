@@ -27,7 +27,6 @@
 			), array('inline' => false));
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
-			echo $this->fetch('script');
 		?>
 	</head>
 	<body>
@@ -49,6 +48,7 @@
 				?>
 			</div>
 		</div>
+		<?php echo $this->fetch('script'); ?>
+		<?php echo $this->element('analytics'); ?>
 	</body>
-	<?php echo $this->element('analytics'); ?>
 </html>
