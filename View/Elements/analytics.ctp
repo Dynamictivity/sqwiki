@@ -1,7 +1,7 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', <?php echo Configure::read('Sqwiki.google-analytics-id'); ?>]);
+  _gaq.push(['_setAccount', '<?php echo Configure::read('Sqwiki.google-analytics-id'); ?>']);
   _gaq.push(['_trackPageview']);
 
   (function() {
