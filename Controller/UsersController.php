@@ -48,7 +48,7 @@ class UsersController extends AppController {
 			$this->User->create();
 			if (($newUser = $this->User->saveNewUser($this->request->data, false))) {
 				$this->Session->setFlash(__('Welcome to %s, please check your e-mail to confirm your account.', Configure::read('Sqwiki.title')));
-				CakeSession::write('Auth', $newUser);
+				//CakeSession::write('Auth', $newUser);
 				$email = $this->SendGrid->sendEmail(
 					array(
 						'to' => array($newUser['User']['email'] => $newUser['User']['username']),

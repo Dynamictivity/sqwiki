@@ -6,6 +6,7 @@ class MarkdownHelper extends AppHelper {
 	//public $helpers = array('Html');
 
 	public function parse($markup) {
+		$markup = Sanitize::html($markup);
 		return $this->__formatForWiki(Markdown($markup));
 	}
 

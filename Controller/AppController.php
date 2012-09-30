@@ -1,6 +1,7 @@
 <?php
 App::uses('Controller', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('Sanitize', 'Utility');
 
 /**
  * Application Controller

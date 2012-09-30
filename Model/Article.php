@@ -20,7 +20,18 @@ class Article extends AppModel {
 		'title' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Title must not be empty.'
 			),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Title must be unique.'
+			),
+			/*
+			'alphaNumeric' => array(
+				'rule' => array('alphaNumeric'),
+				'message' => 'Title must be alphanumeric.'
+			)
+			 */
 		),
 	);
 

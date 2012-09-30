@@ -22,7 +22,7 @@
 				<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 				<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
 				<td>
-					<?php echo $this->Html->link($user['Role']['name'], array('controller' => 'roles', 'action' => 'view', $user['Role']['id'])); ?>
+					<?php echo h($user['Role']['name']); ?>
 				</td>
 				<td><?php echo h($user['User']['article_count']); ?>&nbsp;</td>
 				<td><?php echo h($user['User']['article_revision_count']); ?>&nbsp;</td>

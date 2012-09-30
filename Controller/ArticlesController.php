@@ -67,7 +67,6 @@ class ArticlesController extends AppController {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
 		}
-		$this->request->data['Article']['title'] = ucwords(Inflector::humanize(str_replace('__', '_', Inflector::underscore($this->request->params['slug']))));
 	}
 
 /**
@@ -241,9 +240,6 @@ class ArticlesController extends AppController {
 			} else {
 				$this->Session->setFlash(__('The article could not be saved. Please, try again.'));
 			}
-		}
-		if (!empty($this->request->params['slug'])) {
-			$this->request->data['Article']['title'] = ucwords(Inflector::humanize(Inflector::underscore($this->request->params['slug'])));
 		}
 		$this->render('add');
 	}

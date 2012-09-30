@@ -16,19 +16,10 @@ class Comment extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			),
-		),
-		'article_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			),
-		),
 		'comment' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Comment must not be empty.'
 			),
 		),
 	);

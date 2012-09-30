@@ -32,7 +32,7 @@
 	<body>
 		<div id="container">
 			<div id="header">
-				<h1><?php echo Configure::read('Sqwiki.title'); ?>: <?php echo Configure::read('Sqwiki.slogan'); ?>: <?php echo $this->fetch('title'); ?></h1>
+				<h1><?php echo $this->Html->link(Configure::read('Sqwiki.title') . ': ' . Configure::read('Sqwiki.slogan') . ': ' . $this->fetch('title'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false)); ?></h1>
 			</div>
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>

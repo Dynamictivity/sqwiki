@@ -18,29 +18,20 @@ class ArticleRevision extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'article_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			),
-		),
-		'revision_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			),
-		),
-		'user_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			),
-		),
 		'summary' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Summary must not be empty.'
 			),
 		),
 		'content' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Content must not be empty.'
+			),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Content must be unique.'
 			),
 		),
 	);

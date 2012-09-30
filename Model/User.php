@@ -19,14 +19,14 @@ class User extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'ip_address' => array(
+		'email' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
+				'message' => 'Email address is required.'
 			),
-		),
-		'role_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'Email address already registered.'
 			),
 		),
 	);
