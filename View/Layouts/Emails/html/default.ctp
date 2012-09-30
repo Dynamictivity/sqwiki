@@ -3,7 +3,7 @@
 	<head>
 		<title><?php echo $title_for_layout; ?></title>
 	</head>
-	<body style="background-color: black; color: #BFBFBF; padding: 25px;">
+	<body style="background-color: #FFF; color: #000; padding: 25px;">
 		<p>
 			<?php echo $content_for_layout; ?>
 		</p>
@@ -16,7 +16,7 @@
 			The <?php Configure::read('Sqwiki.title'); ?> team
 		</p>
 		<p>
-			This email was sent from <a href="<?php Configure::read('Sqwiki.url'); ?>" style="color: #BFBFBF;"><?php Configure::read('Sqwiki.url'); ?></a>
+			This email was sent from <a href="<?php Configure::read('Sqwiki.url'); ?>" style="color: #000;"><?php Configure::read('Sqwiki.url'); ?></a>
 		</p>
 	</body>
 </html>

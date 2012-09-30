@@ -38,7 +38,7 @@
 	Router::connect('/account', array('controller' => 'users', 'action' => 'profile'));
 	Router::connect('/account/forgot', array('controller' => 'users', 'action' => 'forgot'));
 	Router::connect('/account/register', array('controller' => 'users', 'action' => 'register'));
-	Router::connect('/account/confirm', array('controller' => 'users', 'action' => 'confirm'));
+	Router::connect('/account/confirm/*', array('controller' => 'users', 'action' => 'confirm'));
 	Router::connect('/account/logout', array('controller' => 'users', 'action' => 'logout'));
 	Router::connect('/account/login', array('controller' => 'users', 'action' => 'login'));
 	Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
