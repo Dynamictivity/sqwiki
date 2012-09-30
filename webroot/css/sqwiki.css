@@ -43,6 +43,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 .comment .comment-body {
 	padding: 1em;
 }
+a.sources {
+	position: relative; top: -0.5em; font-size: 80%;
+}
 
 /** General Style Info **/
 body {
