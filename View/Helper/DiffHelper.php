@@ -9,7 +9,7 @@ App::import('Vendor', 'php-diff/lib/Diff/Renderer/Text/Context');
 class DiffHelper extends AppHelper {
 	//public $helpers = array('Html');
 
-	public function showDiff($old, $new, $options = array(), $type = 'SideBySide') {
+	public function showDiff($old, $new, $options = array(), $type = 'Inline') {
 		if (!in_array($type, array('SideBySide', 'Inline', 'Unified', 'Context'))) {
 			return "Please select a proper type for diff.";
 		}
