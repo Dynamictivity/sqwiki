@@ -11,7 +11,7 @@ class UsersController extends AppController {
 		parent::beforeFilter();
 		switch (AuthComponent::user('role_id')) {
 			default:
-				$this->Auth->allow(array('register', 'login', 'logout'));
+				$this->Auth->allow(array('register', 'login', 'logout', 'forgot', 'confirm'));
 		}
 	}
 
