@@ -29,6 +29,20 @@ class User extends AppModel {
 				'message' => 'Email address already registered.'
 			),
 		),
+                'username' => array(
+                        'notempty' => array(
+                                'rule' => array('notempty'),
+                                'message' => 'Username is required.'
+                        ),
+                        'alphaNumeric' => array(
+                                'rule' => array('alphaNumeric'),
+                                'message' => 'Username must be alphanumeric.'
+                        ),
+                        'isUnique' => array(
+                                'rule' => array('isUnique'),
+                                'message' => 'Username already in use.'
+                        ),
+                ),
 	);
 	
 	public $displayField = 'username';
