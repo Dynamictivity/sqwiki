@@ -78,7 +78,10 @@ class Article extends AppModel {
 				'contain' => array(
 					'ArticleRevision' => array(
 						'conditions' => array(
-							'is_active' => true
+							'is_active' => true,
+							'NOT' => array(
+								'ArticleRevision.reviewed_by_user_id' => false
+							)
 						),
 						'order' => 'ArticleRevision.id DESC'
 					)

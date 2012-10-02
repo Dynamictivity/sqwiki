@@ -181,7 +181,7 @@ class ArticleRevisionsController extends AppController {
 			throw new NotFoundException(__('Invalid article revision'));
 		}
 		$articleRevision = $this->ArticleRevision->read(null, $id);
-		$previousActiveRevision = $this->ArticleRevision->getPreviousActiveRevision();
+		$previousActiveRevision = $this->ArticleRevision->getPreviousApprovedRevision();
 		$this->set(compact('articleRevision', 'previousActiveRevision'));
 		$this->render('view');
 	}
