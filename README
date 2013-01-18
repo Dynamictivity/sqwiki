@@ -1,9 +1,11 @@
 1. Install and configure CakePHP
 2. Set this up as a CakePHP app
-3. Import the DB in Config/schema/sqwiki.sql
-4. Create/add the tmp folder from the CakePHP skel
-5. Visit your new wiki site and register an account
-6. Change the user level in the database manually for your newly created user
+3. Import the DB in Config/Schema/sqwiki.sql
+4. Setup the DB config in Config/
+5. Configure site options in Config/SqwikiConfig.php
+6. Create/add the tmp folder from the CakePHP skel
+7. Visit your new wiki site and register an account
+8. Change the user level in the database manually for your newly created user
 
 TODO
 ===
