@@ -15,5 +15,7 @@ services:
     build: .
     ports:
       - "80:80"
+#    volumes:
+#      - .:/app
     links:
       - mysql

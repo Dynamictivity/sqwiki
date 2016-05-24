@@ -84,7 +84,7 @@ class User extends AppModel
         )
     );
 
-    public function beforeSave()
+    public function beforeSave($options = array())
     {
         if (empty($this->data['User']['id'])) {
             $this->data['User']['token'] = String::uuid();
