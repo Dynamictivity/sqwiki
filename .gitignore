@@ -4,6 +4,7 @@
 *.project
 *.settings
 tmp/
-Config/database.php
 Config/email.php
 .idea
+*.iml
+.vagrant/
