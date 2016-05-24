@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+build
+LICENSE
+README*
+VERSION
+Vagrantfile
+*.iml
+vagrant-libs
+.DS_Store

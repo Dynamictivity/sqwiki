@@ -25,43 +25,43 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connectNamed(array('slug'));
-	Router::connect('/', array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
+Router::connectNamed(array('slug'));
+Router::connect('/', array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**
  * Sqwiki routes
  */
-	Router::connect('/account', array('controller' => 'users', 'action' => 'profile'));
-	Router::connect('/account/forgot', array('controller' => 'users', 'action' => 'forgot'));
-	Router::connect('/account/register', array('controller' => 'users', 'action' => 'register'));
-	Router::connect('/account/confirm/*', array('controller' => 'users', 'action' => 'confirm'));
-	Router::connect('/account/logout', array('controller' => 'users', 'action' => 'logout'));
-	Router::connect('/account/login', array('controller' => 'users', 'action' => 'login'));
-	Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
-	Router::connect('/:slug/revision/add', array('controller' => 'articles', 'action' => 'revise'), array('persist' => array('slug')));
-	Router::connect('/:slug/revision/view/:id', array('controller' => 'article_revisions', 'action' => 'view'), array('persist' => array('slug')));
-	//Router::connect('/:slug/revision/activate/:id', array('controller' => 'article_revisions', 'action' => 'activate'), array('persist' => array('slug')));
-	//Router::connect('/:slug/revision/deactivate/:id', array('controller' => 'article_revisions', 'action' => 'deactivate'), array('persist' => array('slug')));
-	Router::connect('/:slug/history', array('controller' => 'articles', 'action' => 'history'), array('persist' => array('slug')));
-	Router::connect('/:slug/history/*', array('controller' => 'article_revisions', 'action' => 'history'), array('persist' => array('slug')));
-	Router::connect('/:slug/talk', array('controller' => 'articles', 'action' => 'talk'), array('persist' => array('slug')));
-	Router::connect('/:slug/talk/add', array('controller' => 'comments', 'action' => 'add'), array('persist' => array('slug')));
-	Router::connect('/:slug/talk/*', array('controller' => 'comments', 'action' => 'talk'), array('persist' => array('slug')));
-	Router::connect('/history', array('controller' => 'article_revisions', 'action' => 'index'));
-	Router::connect('/history/*', array('controller' => 'article_revisions', 'action' => 'index'));
+Router::connect('/account', array('controller' => 'users', 'action' => 'profile'));
+Router::connect('/account/forgot', array('controller' => 'users', 'action' => 'forgot'));
+Router::connect('/account/register', array('controller' => 'users', 'action' => 'register'));
+Router::connect('/account/confirm/*', array('controller' => 'users', 'action' => 'confirm'));
+Router::connect('/account/logout', array('controller' => 'users', 'action' => 'logout'));
+Router::connect('/account/login', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
+Router::connect('/:slug/revision/add', array('controller' => 'articles', 'action' => 'revise'), array('persist' => array('slug')));
+Router::connect('/:slug/revision/view/:id', array('controller' => 'article_revisions', 'action' => 'view'), array('persist' => array('slug')));
+//Router::connect('/:slug/revision/activate/:id', array('controller' => 'article_revisions', 'action' => 'activate'), array('persist' => array('slug')));
+//Router::connect('/:slug/revision/deactivate/:id', array('controller' => 'article_revisions', 'action' => 'deactivate'), array('persist' => array('slug')));
+Router::connect('/:slug/history', array('controller' => 'articles', 'action' => 'history'), array('persist' => array('slug')));
+Router::connect('/:slug/history/*', array('controller' => 'article_revisions', 'action' => 'history'), array('persist' => array('slug')));
+Router::connect('/:slug/talk', array('controller' => 'articles', 'action' => 'talk'), array('persist' => array('slug')));
+Router::connect('/:slug/talk/add', array('controller' => 'comments', 'action' => 'add'), array('persist' => array('slug')));
+Router::connect('/:slug/talk/*', array('controller' => 'comments', 'action' => 'talk'), array('persist' => array('slug')));
+Router::connect('/history', array('controller' => 'article_revisions', 'action' => 'index'));
+Router::connect('/history/*', array('controller' => 'article_revisions', 'action' => 'index'));
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+require CAKE . 'Config' . DS . 'routes.php';

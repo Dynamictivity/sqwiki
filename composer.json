@@ -1,0 +1,6 @@
+{
+  "require": {
+    "cakephp/cakephp": "2.*",
+    "cakephp/debug_kit": "^2.2.0"
+  }
+}

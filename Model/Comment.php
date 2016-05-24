@@ -1,44 +1,46 @@
 <?php
 App::uses('AppModel', 'Model');
+
 /**
  * Comment Model
  *
  * @property User $User
  * @property Article $Article
  */
-class Comment extends AppModel {
+class Comment extends AppModel
+{
 
-	public $actsAs = array('Ownable', 'Loggable');
+    public $actsAs = array('Ownable', 'Loggable');
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'comment' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				'message' => 'Comment must not be empty.'
-			),
-		),
-	);
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public $validate = array(
+        'comment' => array(
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Comment must not be empty.'
+            ),
+        ),
+    );
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'counterCache' => true
-		),
-		'Article' => array(
-			'className' => 'Article',
-			'foreignKey' => 'article_id',
-			'counterCache' => true
-		)
-	);
+    /**
+     * belongsTo associations
+     *
+     * @var array
+     */
+    public $belongsTo = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'user_id',
+            'counterCache' => true
+        ),
+        'Article' => array(
+            'className' => 'Article',
+            'foreignKey' => 'article_id',
+            'counterCache' => true
+        )
+    );
 }
