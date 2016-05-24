@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sqwiki
+      MYSQL_DATABASE: sqwiki
+  sqwiki:
+    depends_on:
+      - mysql
+    restart: always
+    build: .
+    ports:
+      - "80:80"
+    links:
+      - mysql
