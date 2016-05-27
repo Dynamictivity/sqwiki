@@ -19,8 +19,8 @@ class Comment extends AppModel
      */
     public $validate = array(
         'comment' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Comment must not be empty.'
             ),
         ),

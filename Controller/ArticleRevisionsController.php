@@ -120,7 +120,7 @@ class ArticleRevisionsController extends AppController
             throw new NotFoundException(__('Invalid article revision'));
         }
         $createdByUserId = $this->ArticleRevision->field('user_id');
-        if ($approve && $createdByUserId == AuthComponent::user('id')) {
+        if ($approve && $createdByUserId == AuthComponent::user('id') && AuthComponent::user('role_id') != 1) {
             $this->Session->setFlash(__('You can not approve your own revisions.'));
             $this->redirect(array('action' => 'review_queue'));
         }

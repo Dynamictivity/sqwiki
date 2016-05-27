@@ -17,8 +17,8 @@ class Achievement extends AppModel
      */
     public $validate = array(
         'name' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Name must not be empty.'
             ),
             'isUnique' => array(
@@ -27,8 +27,8 @@ class Achievement extends AppModel
             ),
         ),
         'user_field' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'User Field must not be empty.'
             ),
         ),

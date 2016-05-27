@@ -21,14 +21,14 @@ class ArticleRevision extends AppModel
      */
     public $validate = array(
         'summary' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Summary must not be empty.'
             ),
         ),
         'content' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Content must not be empty.'
             ),
             'isUnique' => array(

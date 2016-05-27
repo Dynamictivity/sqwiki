@@ -15,7 +15,7 @@ class UiThemeHelper extends AppHelper
         if (!CakeSession::check('UiTheme.activeTheme')) {
             CakeSession::write('UiTheme.activeTheme', Configure::read('Sqwiki.default_theme'));
         }
-        $out = $this->Form->create('Theme', array('action' => 'set_theme'));
+        $out = $this->Form->create('Theme', array('url' => '/set_theme'));
         $out .= $this->Form->input('selected', array("type" => "select", "label" => __('Change Theme'), "options" => CakeSession::read('UiTheme.list'), 'value' => CakeSession::read('UiTheme.activeTheme')));
         $out .= $this->Form->end('Go');
         return $out;

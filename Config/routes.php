@@ -41,6 +41,7 @@ Router::connect('/account/register', array('controller' => 'users', 'action' => 
 Router::connect('/account/confirm/*', array('controller' => 'users', 'action' => 'confirm'));
 Router::connect('/account/logout', array('controller' => 'users', 'action' => 'logout'));
 Router::connect('/account/login', array('controller' => 'users', 'action' => 'login'));
+Router::connect('/set_theme', array('controller' => 'themes', 'action' => 'set_theme'));
 Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
 Router::connect('/:slug/revision/add', array('controller' => 'articles', 'action' => 'revise'), array('persist' => array('slug')));
 Router::connect('/:slug/revision/view/:id', array('controller' => 'article_revisions', 'action' => 'view'), array('persist' => array('slug')));

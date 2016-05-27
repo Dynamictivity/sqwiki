@@ -91,7 +91,7 @@ class UsersController extends AppController
                 throw new NotFoundException(__('Invalid email'));
             }
             // Generate new token
-            $user['User']['token'] = String::uuid();
+            $user['User']['token'] = CakeText::uuid();
             if ($this->User->save($user)) {
                 $email = $this->SendGrid->sendEmail(
                     array(

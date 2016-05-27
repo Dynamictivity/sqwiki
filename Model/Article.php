@@ -20,8 +20,8 @@ class Article extends AppModel
      */
     public $validate = array(
         'title' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Title must not be empty.'
             ),
             'isUnique' => array(

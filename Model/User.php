@@ -22,8 +22,8 @@ class User extends AppModel
      */
     public $validate = array(
         'email' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Email address is required.'
             ),
             'isUnique' => array(
@@ -32,8 +32,8 @@ class User extends AppModel
             ),
         ),
         'username' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
+            'notBlank' => array(
+                'rule' => array('notBlank'),
                 'message' => 'Username is required.'
             ),
             'alphaNumeric' => array(
@@ -87,7 +87,7 @@ class User extends AppModel
     public function beforeSave($options = array())
     {
         if (empty($this->data['User']['id'])) {
-            $this->data['User']['token'] = String::uuid();
+            $this->data['User']['token'] = CakeText::uuid();
         }
         if (!empty($this->data['User']['new_password'])) {
             if ($this->data['User']['new_password'] !== $this->data['User']['confirm_password']) {

@@ -45,6 +45,6 @@ class AppController extends Controller
     public function beforeFilter()
     {
         // Temporary for dev
-        //$this->Auth->allow('*');
+//        $this->Auth->allow();
     }
 }
