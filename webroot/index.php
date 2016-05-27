@@ -18,7 +18,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-define('CAKE_CORE_INCLUDE_PATH', '/app/vendor/cakephp/cakephp/lib');
 /**
  * Use the DS to separate the directories in other defines
  */
@@ -59,7 +58,7 @@ if (!defined('APP_DIR')) {
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-//define('CAKE_CORE_INCLUDE_PATH', 'D:' . DS . 'Dropbox' . DS . 'www' . DS . 'apps' . DS . 'CAKEPHP2' . DS . 'lib');
+define('CAKE_CORE_INCLUDE_PATH', '/app/Vendor/cakephp/cakephp/lib');
 
 /**
  * Editing below this line should NOT be necessary.

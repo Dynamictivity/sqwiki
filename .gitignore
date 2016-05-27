@@ -8,3 +8,6 @@ Config/email.php
 .idea
 *.iml
 .vagrant/
+/Plugin/*
+/Vendor/*
+composer.lock
