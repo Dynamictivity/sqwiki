@@ -8,7 +8,7 @@ class MarkdownHelper extends AppHelper
 
     public function parse($markup)
     {
-        $markup = Sanitize::html($markup);
+        $markup = htmlentities($markup, ENT_QUOTES, 'UTF-8', true);
         return $this->__formatForWiki(Markdown($markup));
     }
 

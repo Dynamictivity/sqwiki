@@ -127,10 +127,9 @@ class ArticlesController extends AppController
     /**
      * talk method
      *
-     * @param string $id
      * @return void
      */
-    public function talk($id = null)
+    public function talk()
     {
         if (empty($this->request->params['slug'])) {
             throw new NotFoundException(__('Invalid article'));

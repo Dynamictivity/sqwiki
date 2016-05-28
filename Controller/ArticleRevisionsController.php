@@ -57,6 +57,7 @@ class ArticleRevisionsController extends AppController
 
     /**
      * view method
+     * wrapper for admin_view
      *
      * @throws NotFoundException
      * @param string $id
@@ -85,6 +86,7 @@ class ArticleRevisionsController extends AppController
 
     /**
      * manage_history method
+     * wrapper for admin_history
      *
      * @return void
      */
@@ -95,6 +97,7 @@ class ArticleRevisionsController extends AppController
 
     /**
      * manage_view method
+     * wrapper for admin_view
      *
      * @throws NotFoundException
      * @param string $id
@@ -107,6 +110,7 @@ class ArticleRevisionsController extends AppController
 
     /**
      * manage_approve method
+     * wrapper for admin_approve
      *
      * @throws NotFoundException
      * @param string $id
@@ -115,26 +119,12 @@ class ArticleRevisionsController extends AppController
      */
     public function manage_approve($id = null, $approve = true)
     {
-        $this->ArticleRevision->id = $id;
-        if (!$this->ArticleRevision->exists()) {
-            throw new NotFoundException(__('Invalid article revision'));
-        }
-        $createdByUserId = $this->ArticleRevision->field('user_id');
-        if ($approve && $createdByUserId == AuthComponent::user('id') && AuthComponent::user('role_id') != 1) {
-            $this->Flash->set(__('You can not approve your own revisions.'));
-            $this->redirect(array('action' => 'review_queue'));
-        }
-        if ($this->ArticleRevision->approve($approve)) {
-            $this->Flash->set(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
-        } else {
-            $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
-        }
-        $this->redirect(array('action' => 'review_queue'));
+        $this->admin_approve($id, $approve);
     }
 
     /**
      * manage_reject method
-     * wrapper for manage_reject
+     * wrapper for admin_approve with reject flag
      *
      * @throws NotFoundException
      * @param string $id
@@ -142,7 +132,7 @@ class ArticleRevisionsController extends AppController
      */
     public function manage_reject($id = null)
     {
-        $this->manage_approve($id, false);
+        $this->admin_approve($id, false);
     }
 
     /**
@@ -214,12 +204,17 @@ class ArticleRevisionsController extends AppController
         if (!$this->ArticleRevision->exists()) {
             throw new NotFoundException(__('Invalid article revision'));
         }
+        $createdByUserId = $this->ArticleRevision->field('user_id');
+        if ($approve && $createdByUserId == AuthComponent::user('id') && AuthComponent::user('role_id') != 1) {
+            $this->Flash->set(__('You can not approve your own revisions.'));
+            $this->redirect(array('action' => 'review_queue'));
+        }
         if ($this->ArticleRevision->approve($approve)) {
             $this->Flash->set(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
         } else {
             $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
         }
-        $this->redirect(array('controller' => 'articles', 'action' => 'view', $this->ArticleRevision->field('article_id')));
+        $this->redirect(array('action' => 'review_queue', 'manage' => true));
     }
 
     /**

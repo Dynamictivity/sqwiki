@@ -188,20 +188,6 @@ class UsersController extends AppController
                 $this->Flash->set(__('The user could not be saved. Please, try again.'));
             }
         }
-        /*
-        $email = $this->SendGrid->sendEmail(
-            array(
-                'to' => array($user['User']['email'] => $user['User']['name']),
-                'subject' => __('Orderbolt Account Registration'),
-                'category' => 'registration',
-                'template' => strtolower($accountType) . '_registration',
-                'mergeValues' => array(
-                    '%token%' => $user['User']['token'],
-                    '%appUrl%' => Configure::read('Orderbolt.appUrl')
-                )
-            )
-        );
-        */
         $roles = $this->User->Role->find('list');
         $this->set(compact('roles'));
     }
