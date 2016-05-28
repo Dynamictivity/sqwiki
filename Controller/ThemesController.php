@@ -24,7 +24,7 @@ class ThemesController extends AppController
             throw new NotFoundException(__('Invalid theme'));
         }
         if (CakeSession::write('UiTheme.activeTheme', $this->request->data['Theme']['selected'])) {
-            $this->Session->setFlash(__('The theme has been changed to %s', $this->request->data['Theme']['selected']));
+            $this->Flash->set(__('The theme has been changed to %s', $this->request->data['Theme']['selected']));
             $this->redirect('/');
         }
     }

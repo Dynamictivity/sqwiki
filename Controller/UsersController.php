@@ -33,9 +33,9 @@ class UsersController extends AppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Flash->set(__('The user has been saved'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Flash->set(__('The user could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -52,7 +52,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if (($newUser = $this->User->saveNewUser($this->request->data, false))) {
-                $this->Session->setFlash(__('Welcome to %s, please check your e-mail to confirm your account.', Configure::read('Sqwiki.title')));
+                $this->Flash->set(__('Welcome to %s, please check your e-mail to confirm your account.', Configure::read('Sqwiki.title')));
                 //CakeSession::write('Auth', $newUser);
                 $email = $this->SendGrid->sendEmail(
                     array(
@@ -69,7 +69,7 @@ class UsersController extends AppController
                 );
                 $this->redirect(array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
             } else {
-                $this->Session->setFlash(__('Your account could not be registered. Please, try again.'));
+                $this->Flash->set(__('Your account could not be registered. Please, try again.'));
             }
         }
     }
@@ -106,10 +106,10 @@ class UsersController extends AppController
                         )
                     )
                 );
-                $this->Session->setFlash(__('The account has been reset. Please check your e-mail.'));
+                $this->Flash->set(__('The account has been reset. Please check your e-mail.'));
                 $this->redirect(array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
             } else {
-                $this->Session->setFlash(__('The account could not be reset. Please contact support.'));
+                $this->Flash->set(__('The account could not be reset. Please contact support.'));
             }
         }
     }
@@ -132,14 +132,14 @@ class UsersController extends AppController
             $this->request->data['User']['token'] = String::uuid();
             $this->request->data['User']['is_confirmed'] = true;
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The account has been confirmed'));
+                $this->Flash->set(__('The account has been confirmed'));
                 // Load the user into memory
                 $user = $this->User->read();
                 unset($user['User']['password']);
                 CakeSession::write('Auth', $user);
                 $this->redirect(array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
             } else {
-                $this->Session->setFlash(__('The account could not be confirmed. Please try again.'));
+                $this->Flash->set(__('The account could not be confirmed. Please try again.'));
             }
         }
         $this->request->data = $this->User->read(null, $user['User']['id']);
@@ -182,10 +182,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->saveNewUser($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Flash->set(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Flash->set(__('The user could not be saved. Please, try again.'));
             }
         }
         /*
@@ -221,10 +221,10 @@ class UsersController extends AppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Flash->set(__('The user has been saved'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Flash->set(__('The user could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -247,7 +247,7 @@ class UsersController extends AppController
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());
             } else {
-                $this->Session->setFlash(__('Username or password is incorrect.'), 'default', array(), 'auth');
+                $this->Flash->set(__('Username or password is incorrect.'), 'default', array(), 'auth');
             }
         }
     }

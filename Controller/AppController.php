@@ -13,6 +13,7 @@ class AppController extends Controller
 {
     public $components = array(
         'Session',
+        'Flash',
         'DebugKit.Toolbar',
         'Auth' => array(
             /*

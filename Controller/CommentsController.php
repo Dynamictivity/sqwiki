@@ -55,10 +55,10 @@ class CommentsController extends AppController
         if ($this->request->is('post')) {
             $this->Comment->create();
             if ($this->Comment->save($this->request->data)) {
-                $this->Session->setFlash(__('The comment has been saved'));
+                $this->Flash->set(__('The comment has been saved'));
                 $this->redirect(array('action' => 'talk', 'slug' => $this->request->params['slug']));
             } else {
-                $this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
+                $this->Flash->set(__('The comment could not be saved. Please, try again.'));
             }
         }
         if (empty($this->request->params['slug'])) {
@@ -150,10 +150,10 @@ class CommentsController extends AppController
         if ($this->request->is('post')) {
             $this->Comment->create();
             if ($this->Comment->save($this->request->data)) {
-                $this->Session->setFlash(__('The comment has been saved'));
+                $this->Flash->set(__('The comment has been saved'));
                 $this->redirect(array('action' => 'talk', 'article_id' => $this->request->params['named']['article_id']));
             } else {
-                $this->Session->setFlash(__('The comment could not be saved. Please, try again.'));
+                $this->Flash->set(__('The comment could not be saved. Please, try again.'));
             }
         }
         $this->Render('add');

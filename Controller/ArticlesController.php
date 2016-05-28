@@ -44,13 +44,13 @@ class ArticlesController extends AppController
         $id = $this->Article->slugToId($slug);
         $this->Article->id = $id;
         if (!$this->Article->exists() || $this->request->is('post')) {
-            $this->Session->setFlash(__('The article does not exist yet'));
+            $this->Flash->set(__('The article does not exist yet'));
             $this->add();
             return $this->render('add');
         }
         $article = $this->Article->getCurrentVersion($id);
         if (!$article) {
-            $this->Session->setFlash(__('The article has no active revisions'));
+            $this->Flash->set(__('The article has no active revisions'));
             $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
         }
         $this->set(compact('article'));
@@ -67,10 +67,10 @@ class ArticlesController extends AppController
         if ($this->request->is('post')) {
             $this->Article->create();
             if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Session->setFlash(__('The article has been saved'));
+                $this->Flash->set(__('The article has been saved'));
                 $this->redirect(array('action' => 'view', 'slug' => $this->Article->field('slug')));
             } else {
-                $this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+                $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         }
     }
@@ -94,10 +94,10 @@ class ArticlesController extends AppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Session->setFlash(__('The article has been saved'));
+                $this->Flash->set(__('The article has been saved'));
                 $this->redirect(array('action' => 'view', 'slug' => $slug));
             } else {
-                $this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+                $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
@@ -230,13 +230,13 @@ class ArticlesController extends AppController
     {
         $this->Article->id = $id;
         if (!$this->Article->exists() || $this->request->is('post')) {
-            $this->Session->setFlash(__('The article does not exist yet'));
+            $this->Flash->set(__('The article does not exist yet'));
             $this->admin_add();
             return $this->render('admin_add');
         }
         $article = $this->Article->getCurrentVersion($id);
         if (!$article) {
-            $this->Session->setFlash(__('The article has no active revisions'));
+            $this->Flash->set(__('The article has no active revisions'));
             $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
         }
         $this->set(compact('article'));
@@ -253,10 +253,10 @@ class ArticlesController extends AppController
         if ($this->request->is('post')) {
             $this->Article->create();
             if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Session->setFlash(__('The article has been saved'));
+                $this->Flash->set(__('The article has been saved'));
                 $this->redirect(array('action' => 'view', $this->Article->id));
             } else {
-                $this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+                $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         }
         $this->render('add');
@@ -277,10 +277,10 @@ class ArticlesController extends AppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Session->setFlash(__('The article has been saved'));
+                $this->Flash->set(__('The article has been saved'));
                 $this->redirect(array('action' => 'view', $this->Article->id));
             } else {
-                $this->Session->setFlash(__('The article could not be saved. Please, try again.'));
+                $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
@@ -336,10 +336,10 @@ class ArticlesController extends AppController
             throw new NotFoundException(__('Invalid article'));
         }
         if ($this->Article->delete()) {
-            $this->Session->setFlash(__('Article deleted'));
+            $this->Flash->set(__('Article deleted'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Article was not deleted'));
+        $this->Flash->set(__('Article was not deleted'));
         $this->redirect(array('action' => 'index'));
     }
 }

@@ -121,13 +121,13 @@ class ArticleRevisionsController extends AppController
         }
         $createdByUserId = $this->ArticleRevision->field('user_id');
         if ($approve && $createdByUserId == AuthComponent::user('id') && AuthComponent::user('role_id') != 1) {
-            $this->Session->setFlash(__('You can not approve your own revisions.'));
+            $this->Flash->set(__('You can not approve your own revisions.'));
             $this->redirect(array('action' => 'review_queue'));
         }
         if ($this->ArticleRevision->approve($approve)) {
-            $this->Session->setFlash(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
+            $this->Flash->set(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
         } else {
-            $this->Session->setFlash(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
+            $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
         }
         $this->redirect(array('action' => 'review_queue'));
     }
@@ -215,9 +215,9 @@ class ArticleRevisionsController extends AppController
             throw new NotFoundException(__('Invalid article revision'));
         }
         if ($this->ArticleRevision->approve($approve)) {
-            $this->Session->setFlash(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
+            $this->Flash->set(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
         } else {
-            $this->Session->setFlash(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
+            $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
         }
         $this->redirect(array('controller' => 'articles', 'action' => 'view', $this->ArticleRevision->field('article_id')));
     }
