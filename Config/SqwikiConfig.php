@@ -4,12 +4,12 @@
  */
 $config = array(
     'Sqwiki' => array(
-        'title' => 'Sqwiki',
-        'slogan' => 'the rapid wiki deployment system',
-        'auto_activate_pending_revisions' => true,
-        'allow_user_theme_switching' => true,
-        'default_theme' => 'redmond',
-        'google-analytics-id' => 'UA-35196234-1',
-        'url' => 'http://sqwiki.dynamictivity.com'
+        'title' => getenv('SQWIKI_TITLE'),
+        'slogan' => getenv('SQWIKI_SLOGAN'),
+        'auto_activate_pending_revisions' => getenv('SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS'),
+        'allow_user_theme_switching' => getenv('SQWIKI_ALLOW_USER_THEME_SWITCHING'),
+        'default_theme' => getenv('SQWIKI_DEFAULT_THEME'),
+        'google-analytics-id' => getenv('SQWIKI_GOOGLE_ANALYTICS_ID'),
+        'url' => getenv('SQWIKI_URL'),
     )
 );

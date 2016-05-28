@@ -6,8 +6,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: sqwiki
-      MYSQL_DATABASE: sqwiki
+      MYSQL_ROOT_PASSWORD: 'sqwiki'
+      MYSQL_DATABASE: 'sqwiki'
   sqwiki:
     depends_on:
       - mysql
@@ -15,6 +15,14 @@ services:
     build: .
     ports:
       - "80:80"
+    environment:
+      SQWIKI_TITLE: 'Sqwiki'
+      SQWIKI_SLOGAN: 'the rapid wiki deployment system'
+      SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS: 'true'
+      SQWIKI_ALLOW_USER_THEME_SWITCHING: 'true'
+      SQWIKI_DEFAULT_THEME: 'redmond'
+      SQWIKI_GOOGLE_ANALYTICS_ID: 'UA-35196234-1'
+      SQWIKI_URL: 'http://sqwiki.dynamictivity.com'
     volumes:
       - /app:/app
     links:

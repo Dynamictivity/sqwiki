@@ -43,7 +43,7 @@
 			<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout', 'admin' => false, 'manage' => false)); ?> </li>
 		<?php endif; ?>
 	</ul>
-	<?php if (Configure::read('Sqwiki.allow_user_theme_switching')) : ?>
+	<?php if (Configure::read('Sqwiki.allow_user_theme_switching') == 'true') : ?>
 		<p><?php echo $this->UiTheme->themeSelector(); ?></p>
 	<?php endif; ?>
 </div>
