@@ -231,9 +231,9 @@ class UsersController extends AppController
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
+                $this->redirect($this->Auth->redirectUrl());
             } else {
-                $this->Flash->set(__('Username or password is incorrect.'), 'default', array(), 'auth');
+                $this->Flash->set(__('Username or password is incorrect.'));
             }
         }
     }
