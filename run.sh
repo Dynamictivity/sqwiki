@@ -31,7 +31,7 @@ cake -app /app schema update -y
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
-if [ "$MYSQL_STATUS" -eq 0 ]; then
+if [ "$MYSQL_STATUS" = 0 ]; then
     echo "### Creating initial db schema and populating seed data";
     cake -app /app schema create -y;
     cake -app /app schema create sessions -y;
