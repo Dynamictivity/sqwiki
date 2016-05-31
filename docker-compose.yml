@@ -21,7 +21,7 @@ services:
       SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS: 'true'
       SQWIKI_ALLOW_USER_THEME_SWITCHING: 'true'
       SQWIKI_DEFAULT_THEME: 'redmond'
-      SQWIKI_GOOGLE_ANALYTICS_ID: 'UA-35196234-1'
+      SQWIKI_GOOGLE_ANALYTICS_ID: 'UA-5187184-27'
       SQWIKI_URL: 'http://sqwiki.dynamictivity.com'
       SQWIKI_DEBUG_LEVEL: '2'
       SQWIKI_ADMIN_EMAIL: 'support@dynamictivity.com'
