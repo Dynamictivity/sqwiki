@@ -1,7 +1,7 @@
 <?php
 
-# TODO: Environmental variables
-$mysqli = new mysqli("mysql", "root", "sqwiki", "sqwiki");
+$mysqli = new mysqli(getenv('SQWIKI_DATABASE_HOST'), getenv('SQWIKI_DATABASE_USERNAME'),
+    getenv('SQWIKI_DATABASE_DATABASE'), getenv('SQWIKI_DATABASE_PASSWORD'));
 
 /* check connection */
 if ($mysqli->connect_errno) {
@@ -9,30 +9,15 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-/* Create table doesn't return a resultset */
-//if ($mysqli->query("CREATE TEMPORARY TABLE myCity LIKE City") === TRUE) {
-//    printf("Table myCity successfully created.\n");
-//}
-
-/* Select queries return a resultset */
+/* count number of users */
 if ($result = $mysqli->query("SELECT * FROM users")) {
-//    printf("Select returned %d rows.\n", $result->num_rows);
     $numrows = $result->num_rows;
+
+    /* print number of users to stdout */
     print($numrows);
+
     /* free result set */
     $result->close();
 }
-
-/* If we have to retrieve large amount of data we use MYSQLI_USE_RESULT */
-//if ($result = $mysqli->query("SELECT * FROM City", MYSQLI_USE_RESULT)) {
-//
-//    /* Note, that we can't execute any functions which interact with the
-//       server until result set was closed. All calls will return an
-//       'out of sync' error */
-//    if (!$mysqli->query("SET @a:='this will not work'")) {
-//        printf("Error: %s\n", $mysqli->error);
-//    }
-//    $result->close();
-//}
 
 $mysqli->close();

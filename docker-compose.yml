@@ -27,6 +27,10 @@ services:
       SQWIKI_ADMIN_EMAIL: 'support@dynamictivity.com'
       SQWIKI_OWNER_EMAIL: 'sock.puppet@dynamictivity.com'
       SQWIKI_OWNER_USERNAME: 'sockpuppet'
+      SQWIKI_DATABASE_HOST: 'mysql'
+      SQWIKI_DATABASE_USERNAME: 'root'
+      SQWIKI_DATABASE_PASSWORD: 'sqwiki'
+      SQWIKI_DATABASE_DATABASE: 'sqwiki'
     volumes:
       - /app:/app
     links:
