@@ -41,8 +41,8 @@
 			</div>
 			<div id="footer">
 				<?php echo $this->Html->link(
-						'Powered By Sqwiki',
-						'http://sqwiki.dynamictivity.com',
+						'Powered By Sqwiki.io',
+						'http://sqwiki.io',
 						array('target' => '_blank')
 					);
 				?>

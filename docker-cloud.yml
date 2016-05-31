@@ -23,7 +23,7 @@ sqwiki:
     - SQWIKI_OWNER_USERNAME=sockpuppet
     - SQWIKI_SLOGAN=the rapid wiki deployment system
     - SQWIKI_TITLE=Sqwiki
-    - 'SQWIKI_URL=http://sqwiki.dynamictivity.com'
+    - 'SQWIKI_URL=http://sqwiki.io'
   image: 'travisrowland/sqwiki:latest'
   links:
     - mysql
