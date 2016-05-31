@@ -173,7 +173,7 @@ define('LOG_ERROR', LOG_ERR);
  *
  */
 Configure::write('Session', array(
-    'defaults' => 'php',
+    'defaults' => 'database',
     'timeout' => 4320, // 3 days (x100 in medium)
     'cookieTimeout' => 4320 // 3 days (x100 in medium)
 ));

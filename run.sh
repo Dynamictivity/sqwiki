@@ -25,21 +25,18 @@ else
     echo 'Timeout waiting for MySQL server.'
 fi
 
-#export PATH=/app/Vendor/cakephp/cakephp/lib/Cake/Console:$PATH
-#export MYSQL_STATUS=$(mysql -h 127.0.0.1 -u root --password=sqwiki -e 'select * from users;' sqwiki | grep Anonymous)
-
 echo "### Updating db schema"
 cake -app /app schema update -y
 
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
-if [ "$MYSQL_STATUS" = 0 ]; then
+if [ "$MYSQL_STATUS" -eq 0 ]; then
     echo "### Creating initial db schema and populating seed data";
     cake -app /app schema create -y;
+    cake -app /app schema create sessions -y;
 fi
 
-#export MYSQL_STATUS=$(mysql -h 127.0.0.1 -u root --password=sqwiki -e 'select * from users;' sqwiki | grep Anonymous)
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
