@@ -60,6 +60,7 @@
  */
 class DATABASE_CONFIG {
 
+    # TODO: Environmental variables
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
