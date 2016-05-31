@@ -31,10 +31,10 @@ class ArticleRevision extends AppModel
                 'rule' => array('notBlank'),
                 'message' => 'Content must not be empty.'
             ),
-            'isUnique' => array(
-                'rule' => array('isUnique'),
-                'message' => 'Content must be unique.'
-            ),
+//            'isUnique' => array(
+//                'rule' => array('isUnique'),
+//                'message' => 'Content must be unique.'
+//            ),
         ),
     );
 
