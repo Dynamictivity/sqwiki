@@ -40,14 +40,14 @@ mkdir -p /app/tmp/logs
 chmod -R 777 /app/tmp/*
 
 echo "### Updating db schema"
-cake -app /app schema update -y
+cake -app /app schema update -s 1 -y
 
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
 if [ "$MYSQL_STATUS" -eq 0 ]; then
     echo "### Creating initial db schema and populating seed data";
-    cake -app /app schema create -y;
+    cake -app /app schema create -s 1 -y;
     cake -app /app schema create sessions -y;
 fi
 
