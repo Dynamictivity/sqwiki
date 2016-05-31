@@ -9,3 +9,11 @@ Vagrantfile
 *.iml
 vagrant-libs
 .DS_Store
+.editorconfig
+.gitlab-ci.yml
+docker-cloud.yml
+docker-compose.yml
+init-vagrant.sh
+init-docker.sh
+*.log
+sync.sh
