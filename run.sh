@@ -40,6 +40,14 @@ fi
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
+mkdir -p /app/tmp/cache
+mkdir -p /app/tmp/cache/models
+mkdir -p /app/tmp/cache/persistent
+mkdir -p /app/tmp/cache/views
+mkdir -p /app/tmp/sessions
+mkdir -p /app/tmp/tests
+chmod -R 777 /app/tmp/*
+
 source /etc/apache2/envvars
 tail -F /var/log/apache2/* &
 exec apache2 -D FOREGROUND
