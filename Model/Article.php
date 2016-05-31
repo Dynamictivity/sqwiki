@@ -43,6 +43,10 @@ class Article extends AppModel
      * @var array
      */
     public $belongsTo = array(
+        'Role' => array(
+            'className' => 'Role',
+            'foreignKey' => 'role_id'
+        ),
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id',
@@ -82,9 +86,9 @@ class Article extends AppModel
                     'ArticleRevision' => array(
                         'conditions' => array(
                             'is_active' => true,
-                            'NOT' => array(
-                                'ArticleRevision.reviewed_by_user_id' => false
-                            )
+//                            'NOT' => array(
+//                                'ArticleRevision.reviewed_by_user_id' => false
+//                            )
                         ),
                         'order' => 'ArticleRevision.id DESC'
                     )

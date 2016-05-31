@@ -6,7 +6,8 @@
 		<tr>
 			<th><?php echo $this->Paginator->sort('title'); ?></th>
 			<th><?php echo $this->Paginator->sort('slug'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
+            <th><?php echo $this->Paginator->sort('user_id'); ?></th>
+            <th><?php echo $this->Paginator->sort('role_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('article_revision_count'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('updated'); ?></th>
@@ -22,6 +23,7 @@
 				<td>
 					<?php echo $this->Html->link($article['User']['username'], array('controller' => 'users', 'action' => 'view', $article['User']['id'])); ?>
 				</td>
+                <td><?php echo h($article['Role']['name']); ?>&nbsp;</td>
 				<td><?php echo h($article['Article']['article_revision_count']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>
 				<td><?php echo $this->Time->timeAgoInWords($article['Article']['updated']); ?>&nbsp;</td>
