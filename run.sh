@@ -36,6 +36,7 @@ mkdir -p /app/tmp/cache/persistent
 mkdir -p /app/tmp/cache/views
 mkdir -p /app/tmp/sessions
 mkdir -p /app/tmp/tests
+mkdir -p /app/tmp/logs
 chmod -R 777 /app/tmp/*
 
 echo "### Updating db schema"
