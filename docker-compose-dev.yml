@@ -31,5 +31,7 @@ services:
       SQWIKI_DATABASE_USERNAME: 'root'
       SQWIKI_DATABASE_PASSWORD: 'sqwiki'
       SQWIKI_DATABASE_DATABASE: 'sqwiki'
+    volumes:
+      - /app:/app
     links:
       - mysql
