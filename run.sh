@@ -25,6 +25,8 @@ else
     echo 'Timeout waiting for MySQL server.'
 fi
 
+export PATH=/app/Vendor/cakephp/cakephp/lib/Cake/Console:$PATH
+
 echo "### Updating db schema"
 cake -app /app schema update -y
 
