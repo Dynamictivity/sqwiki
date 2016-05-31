@@ -269,9 +269,13 @@ class AppSchema extends CakeSchema
         // Add exclamation point for good measure
         $pwd .= '!';
 
+        // Output password to terminal
         print("\r\n###### ADMIN PASSWORD\r\n");
         print("'$pwd'");
         print("\r\n#####################\r\n\r\n");
+
+        // Output password to file
+        file_put_contents('/app/tmp/admin-password', $pwd);
 
         return $pwd;
     }

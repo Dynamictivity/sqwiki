@@ -18,12 +18,12 @@ sqwiki:
     - SQWIKI_DATABASE_USERNAME=root
     - SQWIKI_DEBUG_LEVEL=2
     - SQWIKI_DEFAULT_THEME=redmond
-    - SQWIKI_GOOGLE_ANALYTICS_ID=UA-35196234-1
+    - SQWIKI_GOOGLE_ANALYTICS_ID=UA-UA-5187184-27
     - SQWIKI_OWNER_EMAIL=sock.puppet@dynamictivity.com
     - SQWIKI_OWNER_USERNAME=sockpuppet
     - SQWIKI_SLOGAN=the rapid wiki deployment system
     - SQWIKI_TITLE=Sqwiki
-    - 'SQWIKI_URL=http://sqwiki.dynamictivity.com'
+    - 'SQWIKI_URL=http://sqwiki.io'
   image: 'travisrowland/sqwiki:latest'
   links:
     - mysql

@@ -43,6 +43,10 @@ class ArticlesController extends AppController
         $slug = $this->request->params['slug'];
         $id = $this->Article->slugToId($slug);
         $this->Article->id = $id;
+        $accessLevel = $this->Article->field('role_id');
+        if (!empty($accessLevel) && (AuthComponent::user('role_id') > $accessLevel || AuthComponent::user('role_id') == NULL)) {
+            throw new NotFoundException(__('Invalid article'));
+        }
         if (!$this->Article->exists() || $this->request->is('post')) {
             $this->Flash->set(__('The article does not exist yet'));
             $this->add();
@@ -101,6 +105,10 @@ class ArticlesController extends AppController
             }
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
+        }
+        if (AuthComponent::user('role_id') == 1) {
+            $roles = $this->Article->Role->find('list');
+            $this->set(compact('roles'));
         }
         $this->render('revise');
     }
@@ -236,7 +244,7 @@ class ArticlesController extends AppController
         $article = $this->Article->getCurrentVersion($id);
         if (!$article) {
             $this->Flash->set(__('The article has no active revisions'));
-            $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
+            $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false));
         }
         $this->set(compact('article'));
         $this->render('view');
@@ -257,6 +265,10 @@ class ArticlesController extends AppController
             } else {
                 $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
+        }
+        if (AuthComponent::user('role_id') == 1) {
+            $roles = $this->Article->Role->find('list');
+            $this->set(compact('roles'));
         }
         $this->render('add');
     }
@@ -283,6 +295,10 @@ class ArticlesController extends AppController
             }
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
+        }
+        if (AuthComponent::user('role_id') == 1) {
+            $roles = $this->Article->Role->find('list');
+            $this->set(compact('roles'));
         }
         $this->render('revise');
     }
