@@ -359,7 +359,7 @@ fieldset fieldset div {
     margin: 0 20px;
 }
 
-form div {
+form div.input {
     clear: both;
     margin-bottom: 1em;
     /*padding: .5em;*/
@@ -669,14 +669,14 @@ p.error em {
 }
 
 /** Debugging **/
-pre {
-    color: #000;
-    background: #f0f0f0;
-    padding: 15px;
-    -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
+/*pre {*/
+    /*color: #000;*/
+    /*background: #f0f0f0;*/
+    /*padding: 15px;*/
+    /*-moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+    /*-webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+    /*box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);*/
+/*}*/
 
 .cake-debug-output {
     padding: 0;

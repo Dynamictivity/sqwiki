@@ -1,7 +1,11 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
 <?php $this->assign('title', __('New Article')); ?>
+<?php echo $this->Html->script(array(
+    'simplemde.js',
+), array('inline' => false, 'block' => 'simplemde')); ?>
 <div class="articles form">
-    <?php echo $this->Form->create('Article'); ?>
+    <?php // TODO: http://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable ?>
+    <?php echo $this->Form->create('Article', array('name' => 'foo', 'novalidate')); ?>
     <fieldset>
         <legend><?php echo __('Article Details'); ?></legend>
         <?php
