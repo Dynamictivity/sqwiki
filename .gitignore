@@ -8,5 +8,4 @@ tmp/
 *.iml
 .vagrant/
 /Plugin/*
-/Vendor/*
 composer.lock
