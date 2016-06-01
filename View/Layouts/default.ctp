@@ -13,17 +13,15 @@
 			//echo $this->Html->meta('icon');
 			echo $this->Html->css(array(
 				'jqueryui/' . CakeSession::read('UiTheme.activeTheme') . '/style',
-				'../js/markitup/skins/markitup/style',
-				'../js/markitup/sets/markdown/style',
 				'php-diff/style',
 				'sqwiki',
+                '//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css',
 			), null, array('inline' => false));
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js',
 				'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js',
-				'markitup/jquery.markitup',
-				'markitup/sets/markdown/set',
 				'sqwiki',
+                '//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js',
 			), array('inline' => false));
 			echo $this->fetch('meta');
 			echo $this->fetch('css');
@@ -48,7 +46,8 @@
 				?>
 			</div>
 		</div>
-		<?php echo $this->fetch('script'); ?>
+        <?php echo $this->fetch('script'); ?>
+        <?php echo $this->fetch('simplemde'); ?>
 		<?php echo $this->element('analytics'); ?>
 	</body>
 </html>

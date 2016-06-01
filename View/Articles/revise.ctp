@@ -4,6 +4,9 @@ $this->set('article', $this->request->data);
 ?>
 <?php $this->extend('/Layouts/SubLayouts/article_toolbar'); ?>
 <?php $this->assign('title', __('Revise Article')); ?>
+<?php echo $this->Html->script(array(
+    'simplemde.js',
+), array('inline' => false, 'block' => 'simplemde')); ?>
 <div class="articles form">
     <?php echo $this->Form->create('Article'); ?>
     <fieldset>
