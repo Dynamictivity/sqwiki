@@ -1,6 +1,6 @@
 <?php
 App::uses('AppHelper', 'View/Helper');
-App::import('Vendor', 'Markdown/markdown');
+//App::import('Vendor', 'erusev/parsedown');
 
 class MarkdownHelper extends AppHelper
 {
@@ -8,8 +8,12 @@ class MarkdownHelper extends AppHelper
 
     public function parse($markup)
     {
-        $markup = htmlentities($markup, ENT_QUOTES, 'UTF-8', true);
-        return $this->__formatForWiki(Markdown($markup));
+//        $markup = htmlentities($markup, ENT_QUOTES, 'UTF-8', true);
+//        return $this->__formatForWiki(Markdown($markup));
+//        debug(App::path('Vendor'));die;
+        require_once(APP . 'Vendor/erusev/parsedown/Parsedown.php');
+        $Parsedown = new Parsedown();
+        return $Parsedown->text($markup);
     }
 
     private function __formatForWiki($output)

@@ -1,6 +1,10 @@
 {
   "require": {
     "cakephp/cakephp": "2.*",
-    "cakephp/debug_kit": "^2.2.0"
+    "cakephp/debug_kit": "^2.2.0",
+    "erusev/parsedown": "1.*"
+  },
+  "config": {
+    "vendor-dir": "Vendor"
   }
 }
