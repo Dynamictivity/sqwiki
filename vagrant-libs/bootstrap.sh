@@ -24,11 +24,11 @@ yum -y install phpMyAdmin
 
 echo "### Setup app directory under apache"
 mkdir /app
-chown vagrant:vagrant /app
-mkdir /vagrant/tmp
-rsync -va /vagrant/Vendor/cakephp/cakephp/app/tmp/ /vagrant/tmp
-chmod -R 777 /vagrant/tmp
-chown -R vagrant:vagrant /app
+#chown vagrant:vagrant /app
+#mkdir /vagrant/tmp
+#rsync -va /vagrant/Vendor/cakephp/cakephp/app/tmp/ /vagrant/tmp
+#chmod -R 777 /vagrant/tmp
+#chown -R vagrant:vagrant /app
 sed -i.bak 's|DocumentRoot "/var/www/html"|DocumentRoot "/app"|' /etc/httpd/conf/httpd.conf
 sed -i.bak2 's|<Directory "/var/www">|<Directory "/app">|' /etc/httpd/conf/httpd.conf
 #ln -s /vagrant /app
