@@ -10,14 +10,20 @@ sqwiki:
   autoredeploy: true
   environment:
     - SQWIKI_ADMIN_EMAIL=support@dynamictivity.com
+    - SQWIKI_ADMIN_EMAIL_HOST=mail.dynamictivity.com
+    - SQWIKI_ADMIN_EMAIL_PASSWORD=password
+    - SQWIKI_ADMIN_EMAIL_PORT=465
+    - SQWIKI_ADMIN_EMAIL_TLS=true
     - SQWIKI_ALLOW_USER_THEME_SWITCHING=true
     - SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS=true
     - SQWIKI_DATABASE_DATABASE=sqwiki
     - SQWIKI_DATABASE_HOST=mysql
     - SQWIKI_DATABASE_PASSWORD=sqwiki
+    - SQWIKI_DATABASE_PREFIX=
     - SQWIKI_DATABASE_USERNAME=root
     - SQWIKI_DEBUG_LEVEL=2
     - SQWIKI_DEFAULT_THEME=redmond
+    - SQWIKI_EMAIL_TRANSPORT=debug
     - SQWIKI_GOOGLE_ANALYTICS_ID=UA-UA-5187184-27
     - SQWIKI_OWNER_EMAIL=sock.puppet@dynamictivity.com
     - SQWIKI_OWNER_USERNAME=sockpuppet

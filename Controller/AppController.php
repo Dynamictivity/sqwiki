@@ -28,7 +28,7 @@ class AppController extends Controller
             'loginRedirect' => array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false)
         ),
         'Paginator',
-        'SendGrid',
+        'SendEMail',
         'Secure',
         'Security'
     );

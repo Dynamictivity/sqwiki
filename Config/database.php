@@ -87,7 +87,7 @@ class DATABASE_CONFIG
                 'login' => getenv('SQWIKI_DATABASE_USERNAME'),
                 'password' => getenv('SQWIKI_DATABASE_PASSWORD'),
                 'database' => getenv('SQWIKI_DATABASE_DATABASE'),
-                'prefix' => '',
+                'prefix' => getenv('SQWIKI_DATABASE_PREFIX'),
             );
         } else {
             $this->default = $this->test;

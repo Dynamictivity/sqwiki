@@ -54,22 +54,24 @@ class UsersController extends AppController
             if (($newUser = $this->User->saveNewUser($this->request->data, false))) {
                 $this->Flash->set(__('Welcome to %s, please check your e-mail to confirm your account.', Configure::read('Sqwiki.title')));
                 //CakeSession::write('Auth', $newUser);
-                $email = $this->SendGrid->sendEmail(
+                $sentMail = $this->SendEMail->sendEmail(
                     array(
                         'to' => array($newUser['User']['email'] => $newUser['User']['username']),
                         'subject' => __('%s Account Registration', Configure::read('Sqwiki.title')),
-                        'category' => 'registration',
                         'template' => 'registration',
-                        'mergeValues' => array(
-                            '%token%' => $newUser['User']['token'],
-                            '%appUrl%' => Configure::read('Sqwiki.url'),
-                            '%siteTitle%' => Configure::read('Sqwiki.title')
+                        'viewVars' => array(
+                            'token' => $newUser['User']['token'],
+                            'appUrl' => Configure::read('Sqwiki.url'),
+                            'siteTitle' => Configure::read('Sqwiki.title')
                         )
                     )
                 );
+                if (!$sentMail) {
+                    $this->Flash->set(__('Your account could not be registered. Please contact support.'));
+                }
                 $this->redirect(array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
             } else {
-                $this->Flash->set(__('Your account could not be registered. Please, try again.'));
+                $this->Flash->set(__('Your account could not be registered. Please contact support.'));
             }
         }
     }
@@ -93,20 +95,22 @@ class UsersController extends AppController
             // Generate new token
             $user['User']['token'] = CakeText::uuid();
             if ($this->User->save($user)) {
-                $email = $this->SendGrid->sendEmail(
+                $this->Flash->set(__('The account has been reset. Please check your e-mail.'));
+                $sentMail = $this->SendEMail->sendEmail(
                     array(
                         'to' => array($user['User']['email'] => $user['User']['username']),
                         'subject' => __('%s Account Reset', Configure::read('Sqwiki.title')),
-                        'category' => 'account_reset',
                         'template' => 'account_reset',
-                        'mergeValues' => array(
-                            '%token%' => $user['User']['token'],
-                            '%appUrl%' => Configure::read('Sqwiki.url'),
-                            '%siteTitle%' => Configure::read('Sqwiki.title')
+                        'viewVars' => array(
+                            'token' => $user['User']['token'],
+                            'appUrl' => Configure::read('Sqwiki.url'),
+                            'siteTitle' => Configure::read('Sqwiki.title')
                         )
                     )
                 );
-                $this->Flash->set(__('The account has been reset. Please check your e-mail.'));
+                if (!$sentMail) {
+                    $this->Flash->set(__('The account could not be reset. Please contact support.'));
+                }
                 $this->redirect(array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false));
             } else {
                 $this->Flash->set(__('The account could not be reset. Please contact support.'));

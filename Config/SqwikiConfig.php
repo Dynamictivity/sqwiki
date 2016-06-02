@@ -11,5 +11,9 @@ $config = array(
         'default_theme' => getenv('SQWIKI_DEFAULT_THEME'),
         'google-analytics-id' => getenv('SQWIKI_GOOGLE_ANALYTICS_ID'),
         'url' => getenv('SQWIKI_URL'),
+        'email_transport' => getenv('SQWIKI_EMAIL_TRANSPORT'),
+        'admin_email' => getenv('SQWIKI_ADMIN_EMAIL'),
+        'owner_email' => getenv('SQWIKI_OWNER_EMAIL'),
+        'owner_username' => getenv('SQWIKI_OWNER_USERNAME'),
     )
 );
