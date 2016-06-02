@@ -2,7 +2,7 @@ Sqwiki's goal is to be the easiest wiki software in the world to use.
 
 You can find the source code on [GitHub](http://https://github.com/Dynamictivity/sqwiki)
 
-#Demo
+# Demo
 You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwiki.dynamictivity.com)
 
 # Features
