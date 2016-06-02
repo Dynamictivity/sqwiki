@@ -60,6 +60,7 @@ class UsersController extends AppController
                         'subject' => __('%s Account Registration', Configure::read('Sqwiki.title')),
                         'template' => 'registration',
                         'viewVars' => array(
+                            'name' => $newUser['User']['username'],
                             'token' => $newUser['User']['token'],
                             'appUrl' => Configure::read('Sqwiki.url'),
                             'siteTitle' => Configure::read('Sqwiki.title')
@@ -102,6 +103,7 @@ class UsersController extends AppController
                         'subject' => __('%s Account Reset', Configure::read('Sqwiki.title')),
                         'template' => 'account_reset',
                         'viewVars' => array(
+                            'name' => $user['User']['username'],
                             'token' => $user['User']['token'],
                             'appUrl' => Configure::read('Sqwiki.url'),
                             'siteTitle' => Configure::read('Sqwiki.title')
