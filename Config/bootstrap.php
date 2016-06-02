@@ -130,7 +130,6 @@ function pon($count)
 /**
  * Load Vendors
  */
-App::import('Vendor', 'SendGrid/SmtpApiHeader');
 
 /**
  * Load Custom Configuration Files
