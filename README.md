@@ -12,11 +12,11 @@ You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwi
 4. Access Levels (Admin/Member/Editor/Banned)
 5. Diff (Difference) viewing
 
-# Todo
-1. etc.
-
 Here is an example of the diff view:
 ![](https://dl.dropboxusercontent.com/u/5765310/Screen%20Shot%202016-06-02%20at%202.10.25%20PM.png)
+
+# Todo
+1. etc.
 
 # Quick deployment instructions
 These instructions will get you up and running quickly.
