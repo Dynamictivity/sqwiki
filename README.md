@@ -10,6 +10,7 @@ You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwi
 2. Themeable
 3. Moderation Queue
 4. Access Levels (Admin/Member/Editor/Banned)
+5. Talk pages
 5. Diff (Difference) viewing
 
 Here is an example of the diff view:
