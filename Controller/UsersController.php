@@ -135,7 +135,7 @@ class UsersController extends AppController
         if ($this->request->is('post') || $this->request->is('put')) {
             // Generate new token
             $this->request->data['User']['id'] = $user['User']['id'];
-            $this->request->data['User']['token'] = String::uuid();
+            $this->request->data['User']['token'] = null;
             $this->request->data['User']['is_confirmed'] = true;
             if ($this->User->save($this->request->data)) {
                 $this->Flash->set(__('The account has been confirmed'));
