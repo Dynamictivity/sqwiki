@@ -7,7 +7,8 @@ You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwi
 
 # Features
 1. Markdown with a powerful WYSIWYG markup editor
-2. Themeable
+2. HTML which gets [purified](http://htmlpurifier.org/)
+2. Themeable with [jQueryUI](https://jqueryui.com/)
 3. Moderation Queue
 4. Access Levels (Admin/Member/Editor/Banned)
 5. Talk pages
@@ -17,7 +18,7 @@ Here is an example of the diff view:
 ![](https://dl.dropboxusercontent.com/u/5765310/Screen%20Shot%202016-06-02%20at%202.10.25%20PM.png)
 
 # Todo
-1. etc.
+- [http://gitlab.dynamictivity.com/sqwiki/sqwiki/issues](http://gitlab.dynamictivity.com/sqwiki/sqwiki/issues)
 
 # Quick deployment instructions
 These instructions will get you up and running quickly.
@@ -71,6 +72,7 @@ These instructions will allow you to make live updates to the files without havi
 1. `# vagrant up` -- Bring up the Vagrant dev environment
 2. `# vagrant ssh` -- Login to the Vagrant dev environment
 3. `# cd /vagrant` -- Change into the work tree
-4. `# ./init-docker-dev` -- Bring up the application docker container cluster
-5. `# ./sync.sh` -- Sync the changed files to the running docker container
+4. `# composer install` -- Install required packages
+5. `# ./init-docker-dev` -- Bring up the application docker container cluster
+6. `# sudo ./sync.sh` -- Sync the changed files to the running docker container
     * _NOTE:_ You must do this every time you make changes to the files and you don't even need to restart the docker container

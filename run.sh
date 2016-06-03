@@ -54,6 +54,8 @@ fi
 export MYSQL_STATUS=$(php /app/check_db.php)
 echo "MySQL Status: $MYSQL_STATUS"
 
+chmod 777 /app/Vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer
+
 source /etc/apache2/envvars
 tail -F /var/log/apache2/* &
 exec apache2 -D FOREGROUND
