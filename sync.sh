@@ -11,3 +11,5 @@ mkdir -p /app/tmp/sessions
 mkdir -p /app/tmp/tests
 mkdir -p /app/tmp/logs
 chmod -R 777 /app/tmp/*
+
+chmod 777 /app/Vendor/ezyang/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer

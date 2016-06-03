@@ -9,3 +9,4 @@ RUN rm -fr /app
 ADD . /app
 RUN composer self-update
 RUN composer install --working-dir=/app
+#RUN composer update --working-dir=/app

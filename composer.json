@@ -3,7 +3,8 @@
     "cakephp/cakephp": "2.*",
     "cakephp/debug_kit": "^2.2.0",
     "erusev/parsedown": "1.*",
-    "phpspec/php-diff": "1.*"
+    "phpspec/php-diff": "1.*",
+    "ezyang/htmlpurifier": "4.*"
   },
   "config": {
     "vendor-dir": "Vendor"

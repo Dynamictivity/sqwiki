@@ -21,5 +21,10 @@ $this->set('article', $this->request->data);
         echo $this->Form->input('ArticleRevision.0.content');
         ?>
     </fieldset>
+    <pre>
+        <strong>Key:</strong></br>
+        ##Sources## -- This will start the `sources` section of the page.<br />
+        [[Main]] -- Create an internal link to the `Main` article
+    </pre>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
