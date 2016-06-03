@@ -8,11 +8,11 @@ You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwi
 # Features
 1. Markdown with a powerful WYSIWYG markup editor
 2. HTML which gets [purified](http://htmlpurifier.org/)
-2. Themeable with [jQueryUI](https://jqueryui.com/)
-3. Moderation Queue
-4. Access Levels (Admin/Member/Editor/Banned)
-5. Talk pages
-5. Diff (Difference) viewing
+3. Themeable with [jQueryUI](https://jqueryui.com/)
+4. Moderation Queue
+5. Access Levels (Admin/Member/Editor/Banned)
+6. Talk pages
+7. Diff (Difference) viewing
 
 Here is an example of the diff view:
 ![](https://dl.dropboxusercontent.com/u/5765310/Screen%20Shot%202016-06-02%20at%202.10.25%20PM.png)
