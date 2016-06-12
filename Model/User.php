@@ -26,6 +26,10 @@ class User extends AppModel
                 'rule' => array('notBlank'),
                 'message' => 'Email address is required.'
             ),
+            'email' => array(
+                'rule' => array('email'),
+                'message' => 'Must be a valid email address.'
+            ),
             'isUnique' => array(
                 'rule' => array('isUnique'),
                 'message' => 'Email address already registered.'
@@ -36,9 +40,9 @@ class User extends AppModel
                 'rule' => array('notBlank'),
                 'message' => 'Username is required.'
             ),
-            'alphaNumeric' => array(
-                'rule' => array('alphaNumeric'),
-                'message' => 'Username must be alphanumeric.'
+            'custom' => array(
+                'rule' => array('custom', '/^[a-zA-Z0-9-_.]+$/'),
+                'message' => 'Username must only contain lowercase alphanumerics, underscore, hyphen and period..'
             ),
             'isUnique' => array(
                 'rule' => array('isUnique'),

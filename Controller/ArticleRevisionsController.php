@@ -182,7 +182,7 @@ class ArticleRevisionsController extends AppController
     {
         $this->ArticleRevision->id = $id;
         if (!$this->ArticleRevision->exists()) {
-            throw new NotFoundException(__('Invalid article revision'));
+            $this->redirect(array('action' => 'review_queue'));
         }
         $articleRevision = $this->ArticleRevision->read(null, $id);
         $previousActiveRevision = $this->ArticleRevision->getPreviousApprovedRevision();
@@ -207,14 +207,14 @@ class ArticleRevisionsController extends AppController
         $createdByUserId = $this->ArticleRevision->field('user_id');
         if ($approve && $createdByUserId == AuthComponent::user('id') && AuthComponent::user('role_id') != 1) {
             $this->Flash->set(__('You can not approve your own revisions.'));
-            $this->redirect(array('action' => 'review_queue'));
+            $this->redirect(array('action' => 'view', ++$id, 'manage' => true));
         }
         if ($this->ArticleRevision->approve($approve)) {
             $this->Flash->set(__('The article revision has been %s', ($approve ? __('approved') : __('rejected'))));
         } else {
             $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
         }
-        $this->redirect(array('action' => 'review_queue', 'manage' => true));
+        $this->redirect(array('action' => 'view', ++$id, 'manage' => true));
     }
 
     /**

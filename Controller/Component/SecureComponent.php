@@ -21,7 +21,7 @@ class SecureComponent extends Component
             // Refresh the user session
             CakeSession::write('Auth', ClassRegistry::init('User')->findById(AuthComponent::user('id')));
             // Set userId and roleId to variables for brevity
-            $userId = AuthComponent::user('id');
+//            $userId = AuthComponent::user('id');
             $roleId = AuthComponent::user('role_id');
             // Catch invalid roles
             if (empty($roleId) || $roleId > 3) {

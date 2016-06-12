@@ -14,6 +14,9 @@ $this->set('article', $this->request->data);
         <?php
         echo $this->Form->input('id');
         echo $this->Form->input('title');
+        if (AuthComponent::user('role_id') === '1') {
+            echo $this->Form->input('slug');
+        }
         if (!empty($roles)) {
             echo $this->Form->input('role_id', array('label' => 'Access Level', 'empty' => 'Public'));
         }

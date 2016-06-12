@@ -37,7 +37,9 @@
     <ul>
         <?php if (!AuthComponent::user()) : ?>
             <li><?php echo $this->Html->link(__('Login'), array('controller' => 'users', 'action' => 'login', 'admin' => false, 'manage' => false)); ?> </li>
-            <li><?php echo $this->Html->link(__('Register'), array('controller' => 'users', 'action' => 'register', 'admin' => false, 'manage' => false)); ?> </li>
+            <?php if (Configure::read('Sqwiki.enable_account_registration') == 'true') : ?>
+                <li><?php echo $this->Html->link(__('Register'), array('controller' => 'users', 'action' => 'register', 'admin' => false, 'manage' => false)); ?> </li>
+            <?php endif; ?>
         <?php else : ?>
             <li><?php echo $this->Html->link(__('Account'), array('controller' => 'users', 'action' => 'profile', 'admin' => false, 'manage' => false)); ?> </li>
             <li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout', 'admin' => false, 'manage' => false)); ?> </li>

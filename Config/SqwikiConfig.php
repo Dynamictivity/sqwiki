@@ -6,6 +6,7 @@ $config = array(
     'Sqwiki' => array(
         'title' => getenv('SQWIKI_TITLE'),
         'slogan' => getenv('SQWIKI_SLOGAN'),
+        'enable_account_registration' => getenv('SQWIKI_ENABLE_ACCOUNT_REGISTRATION'),
         'auto_activate_pending_revisions' => getenv('SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS'),
         'allow_user_theme_switching' => getenv('SQWIKI_ALLOW_USER_THEME_SWITCHING'),
         'default_theme' => getenv('SQWIKI_DEFAULT_THEME'),

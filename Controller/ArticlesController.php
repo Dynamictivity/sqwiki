@@ -50,6 +50,7 @@ class ArticlesController extends AppController
         if (!$this->Article->exists() || $this->request->is('post')) {
             $this->Flash->set(__('The article does not exist yet'));
             $this->add();
+            $this->request->data['Article']['title'] = $slug;
             return $this->render('add');
         }
         $article = $this->Article->getCurrentVersion($id);
