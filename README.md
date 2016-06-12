@@ -11,8 +11,9 @@ You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwi
 3. Themeable with [jQueryUI](https://jqueryui.com/)
 4. Moderation Queue
 5. Access Levels (Admin/Member/Editor/Banned)
-6. Talk pages
-7. Diff (Difference) viewing
+6. Protected pages based on role level (Admin, Editor, Member, Public)
+7. Talk pages
+8. Diff (Difference) viewing
 
 Here is an example of the diff view:
 ![](https://dl.dropboxusercontent.com/u/5765310/Screen%20Shot%202016-06-02%20at%202.10.25%20PM.png)
