@@ -73,6 +73,6 @@ These instructions will allow you to make live updates to the files without havi
 2. `# vagrant ssh` -- Login to the Vagrant dev environment
 3. `# cd /vagrant` -- Change into the work tree
 4. `# composer install` -- Install required packages
-5. `# ./init-docker-dev` -- Bring up the application docker container cluster
+5. `# ./init-docker-dev.sh` -- Bring up the application docker container cluster
 6. `# sudo ./sync.sh` -- Sync the changed files to the running docker container
     * _NOTE:_ You must do this every time you make changes to the files and you don't even need to restart the docker container
