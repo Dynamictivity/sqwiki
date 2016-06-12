@@ -226,6 +226,31 @@ class UsersController extends AppController
     }
 
     /**
+     * admin_delete method
+     *
+     * @throws MethodNotAllowedException
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function admin_delete($id = null)
+    {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        if ($this->User->delete()) {
+            $this->Flash->set(__('User deleted'));
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Flash->set(__('User was not deleted'));
+        $this->redirect(array('action' => 'index'));
+    }
+
+    /**
      * login method
      *
      * @return void

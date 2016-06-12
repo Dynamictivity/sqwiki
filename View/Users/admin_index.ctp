@@ -31,6 +31,7 @@
                 <td><?php echo $this->Time->timeAgoInWords($user['User']['updated']); ?>&nbsp;</td>
                 <td class="actions">
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('Delete'), array('controller' => 'users', 'action' => 'delete', $user['User']['id'], 'admin' => true), array('class' => 'ui-state-error'), __('Are you sure you want to delete # %s?', $user['User']['username'])); ?>
                 </td>
             </tr>
         <?php endforeach; ?>
