@@ -1,6 +1,7 @@
 <?php $this->extend('/Layouts/SubLayouts/menu_left'); ?>
 <?php if (!empty($article['Article']['id']) || !empty($this->request->params['slug'])) : ?>
     <div class="article-toolbar right">
+        <?php if (!empty($article['Article']['role_id'])): ?><span class="protected">[Protected]</span><?php endif; ?>
         <?php if (AuthComponent::user() && AuthComponent::user('role_id') < 3 && (!empty($this->request->params['admin']) || !empty($this->request->params['manage']))) : ?>
             <?php echo $this->Html->link(__('Article'), array('controller' => 'articles', 'action' => 'view', $article['Article']['id'])); ?>
             <?php echo $this->Html->link(__('Edit'), array('controller' => 'articles', 'action' => 'revise', $article['Article']['id']), array('class' => 'ui-state-highlight')); ?>
