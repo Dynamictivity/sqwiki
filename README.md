@@ -5,6 +5,9 @@ You can find the source code on [GitHub](http://https://github.com/Dynamictivity
 # Demo
 You can access a demo of Sqwiki at [http://sqwiki.dynamictivity.com](http://sqwiki.dynamictivity.com)
 
+# Static Code Analysis
+[https://codeclimate.com/github/Dynamictivity/sqwiki](https://codeclimate.com/github/Dynamictivity/sqwiki)
+
 # Features
 1. Markdown with a powerful WYSIWYG markup editor
 2. HTML which gets [purified](http://htmlpurifier.org/)
@@ -45,7 +48,7 @@ Simply modify the `docker-compose.yml` with your desired settings, here is an ex
 ```
     environment:
       SQWIKI_TITLE: 'Sqwiki'
-      SQWIKI_SLOGAN: 'the rapid wiki deployment system'
+      SQWIKI_SLOGAN: 'the squeaky clean wiki'
       SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS: 'true'
       SQWIKI_ALLOW_USER_THEME_SWITCHING: 'true'
       SQWIKI_ENABLE_ACCOUNT_REGISTRATION=true

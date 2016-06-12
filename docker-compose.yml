@@ -17,7 +17,7 @@ services:
       - "80:80"
     environment:
       SQWIKI_TITLE: 'Sqwiki'
-      SQWIKI_SLOGAN: 'the rapid wiki deployment system'
+      SQWIKI_SLOGAN: 'the squeaky clean wiki'
       SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS: 'true'
       SQWIKI_ALLOW_USER_THEME_SWITCHING: 'true'
       SQWIKI_ENABLE_ACCOUNT_REGISTRATION: 'true'
