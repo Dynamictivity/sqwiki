@@ -48,6 +48,7 @@ Simply modify the `docker-compose.yml` with your desired settings, here is an ex
       SQWIKI_SLOGAN: 'the rapid wiki deployment system'
       SQWIKI_AUTO_ACTIVATE_PENDING_REVISIONS: 'true'
       SQWIKI_ALLOW_USER_THEME_SWITCHING: 'true'
+      SQWIKI_ENABLE_ACCOUNT_REGISTRATION=true
       SQWIKI_DEFAULT_THEME: 'redmond'
       SQWIKI_GOOGLE_ANALYTICS_ID: 'UA-5187184-27'
       SQWIKI_URL: 'http://sqwiki.io'
