@@ -19,7 +19,9 @@ class SecureComponent extends Component
         // If the user is logged-in
         if (AuthComponent::user('id')) {
             // Refresh the user session
-            CakeSession::write('Auth', ClassRegistry::init('User')->findById(AuthComponent::user('id')));
+            $User = ClassRegistry::init('User');
+            $User->recursive = -1;
+            CakeSession::write('Auth', $User->findById(AuthComponent::user('id')));
             // Set userId and roleId to variables for brevity
 //            $userId = AuthComponent::user('id');
             $roleId = AuthComponent::user('role_id');
