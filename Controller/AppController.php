@@ -30,7 +30,7 @@ class AppController extends Controller
         'Paginator',
         'SendEMail',
         'Secure',
-        'Security'
+//        'Security'
     );
     public $helpers = array(
         'Html',
