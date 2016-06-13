@@ -37,12 +37,16 @@ class CommentsController extends AppController
                     'article_id' => $id
                 )
             );
+            $this->Comment->Article->recursive = -1;
+            $article = $this->Comment->Article->getCurrentVersion($id);
+            $this->set(compact('article'));
         }
         if (!$this->Comment->Article->exists()) {
             throw new NotFoundException(__('Invalid article'));
         }
         $this->Comment->recursive = 0;
         $this->set('comments', $this->paginate());
+        $this->render('talk');
     }
 
     /**
@@ -70,6 +74,7 @@ class CommentsController extends AppController
             throw new NotFoundException(__('Invalid article'));
         }
         $this->Set(compact('article'));
+        $this->render('add');
     }
 
     /**
@@ -79,7 +84,7 @@ class CommentsController extends AppController
      */
     public function manage_talk()
     {
-        $this->admin_talk();
+        $this->talk();
     }
 
     /**
@@ -89,7 +94,7 @@ class CommentsController extends AppController
      */
     public function manage_add()
     {
-        $this->admin_add();
+        $this->add();
     }
 
     /**
@@ -110,21 +115,7 @@ class CommentsController extends AppController
      */
     public function admin_talk()
     {
-        if (!empty($this->request->params['named']['article_id'])) {
-            $this->Comment->Article->id = $this->request->params['named']['article_id'];
-            $this->paginate = array(
-                'conditions' => array(
-                    'article_id' => $this->request->params['named']['article_id']
-                )
-            );
-            $article['Article']['id'] = $this->request->params['named']['article_id'];
-            $this->Set(compact('article'));
-        }
-        if (!$this->Comment->Article->exists()) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        $this->Comment->recursive = 0;
-        $this->set('comments', $this->paginate());
+        $this->talk();
     }
 
     /**
@@ -134,28 +125,6 @@ class CommentsController extends AppController
      */
     public function admin_add()
     {
-        if (!empty($this->request->params['named']['article_id'])) {
-            /*
-            $this->paginate = array(
-                'conditions' => array(
-                    'article_id' => $this->request->params['named']['article_id']
-                )
-            );
-            */
-            $article['Article']['id'] = $this->request->params['named']['article_id'];
-            $this->Set(compact('article'));
-        } else {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        if ($this->request->is('post')) {
-            $this->Comment->create();
-            if ($this->Comment->save($this->request->data)) {
-                $this->Flash->set(__('The comment has been saved'));
-                $this->redirect(array('action' => 'talk', 'article_id' => $this->request->params['named']['article_id']));
-            } else {
-                $this->Flash->set(__('The comment could not be saved. Please, try again.'));
-            }
-        }
-        $this->Render('add');
+        $this->add();
     }
 }

@@ -14,13 +14,12 @@
         <!-- <li class="strike"><?php echo $this->Html->link(__('Browse Categories'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li> -->
         <li><?php echo $this->Html->link(__('Community Portal'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Portal', 'admin' => false, 'manage' => false)); ?> </li>
         <li><?php echo $this->Html->link(__('Recent Changes'), array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false)); ?> </li>
+        <li><?php echo $this->Html->link(__('All Articles'), array('controller' => 'articles', 'action' => 'index', 'sort' => 'title', 'direction' => 'asc', 'admin' => false, 'manage' => false)); ?> </li>
         <li><?php echo $this->Html->link(__('Support'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Support', 'admin' => false, 'manage' => false)); ?> </li>
     </ul>
     <?php if (AuthComponent::user('role_id') == 1) : ?>
         <h3><?php echo __('Administration'); ?></h3>
         <ul>
-            <!-- <li><?php echo $this->Html->link(__('Achievements'), array('controller' => 'achievements', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li> -->
-            <li><?php echo $this->Html->link(__('Articles'), array('controller' => 'articles', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
             <li><?php echo $this->Html->link(__('Article Revisions'), array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => true, 'manage' => false)); ?> </li>
             <li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
         </ul>
@@ -28,7 +27,6 @@
     <?php if (AuthComponent::user() && AuthComponent::user('role_id') < 3) : ?>
         <h3><?php echo __('Moderation'); ?></h3>
         <ul>
-            <li><?php echo $this->Html->link(__('Articles'), array('controller' => 'articles', 'action' => 'index', 'admin' => false, 'manage' => true)); ?> </li>
             <li><?php echo $this->Html->link(__('Article Revision Queue'), array('controller' => 'article_revisions', 'action' => 'review_queue', 'admin' => false, 'manage' => true)); ?> </li>
             <li><?php echo $this->Html->link(__('Recent Talk'), array('controller' => 'comments', 'action' => 'index', 'admin' => false, 'manage' => true, 'sort' => 'id', 'direction' => 'desc')); ?> </li>
         </ul>
