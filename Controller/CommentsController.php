@@ -51,7 +51,6 @@ class CommentsController extends AppController
         }
         $this->Comment->recursive = 0;
         $this->set('comments', $this->paginate());
-        $this->render('talk');
     }
 
     /**
@@ -79,7 +78,6 @@ class CommentsController extends AppController
             throw new NotFoundException(__('Invalid article'));
         }
         $this->Set(compact('article'));
-        $this->render('add');
     }
 
     /**

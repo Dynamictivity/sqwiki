@@ -128,6 +128,8 @@ class ArticleRevisionsController extends AppController
         );
         $this->ArticleRevision->recursive = 0;
         $this->set('articleRevisions', $this->paginate());
+        $roles = $this->ArticleRevision->Article->Role->find('list');
+        $this->set(compact('roles'));
     }
 
     /**

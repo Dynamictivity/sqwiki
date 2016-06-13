@@ -41,7 +41,7 @@ class ArticlesController extends AppController
         $this->Article->recursive = 0;
         $this->set('articles', $this->paginate());
         if (AuthComponent::user('role_id') <= 2) {
-            $this->render('admin_index');
+            $this->render('manage_index');
         }
     }
 
@@ -73,7 +73,6 @@ class ArticlesController extends AppController
             $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
         }
         $this->set(compact('article'));
-        $this->render('view');
     }
 
     /**
@@ -101,7 +100,6 @@ class ArticlesController extends AppController
             $this->set(compact('roles'));
         }
         $this->request->data['Article']['title'] = $slug;
-        $this->render('add');
     }
 
     /**
@@ -133,11 +131,10 @@ class ArticlesController extends AppController
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
         }
-        if (AuthComponent::user('role_id') == 1) {
+        if (AuthComponent::user('role_id') <= 2) {
             $roles = $this->Article->Role->find('list');
             $this->set(compact('roles'));
         }
-        $this->render('revise');
     }
 
     /**
