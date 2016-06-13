@@ -5,6 +5,7 @@
     <table cellpadding="0" cellspacing="0">
         <tr>
             <th><?php echo $this->Paginator->sort('title'); ?></th>
+            <th><?php echo $this->Paginator->sort('user_id'); ?></th>
             <th><?php echo $this->Paginator->sort('created'); ?></th>
             <th><?php echo $this->Paginator->sort('updated'); ?></th>
             <th class="actions"><?php echo __('Actions'); ?></th>
@@ -14,6 +15,9 @@
             <tr>
                 <td>
                     <?php echo $this->Html->link($article['Article']['title'], array('action' => 'view', $article['Article']['id'])); ?>
+                </td>
+                <td>
+                    <?php echo h($article['User']['username']); ?>
                 </td>
                 <td><?php echo $this->Time->timeAgoInWords($article['Article']['created']); ?>&nbsp;</td>
                 <td><?php echo $this->Time->timeAgoInWords($article['Article']['updated']); ?>&nbsp;</td>

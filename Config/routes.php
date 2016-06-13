@@ -45,6 +45,7 @@ Router::connect('/set_theme', array('controller' => 'themes', 'action' => 'set_t
 //Router::connect('/articles/*', array('controller' => 'articles', 'action' => 'index'));
 Router::connect('/history', array('controller' => 'article_revisions', 'action' => 'index'));
 Router::connect('/history/*', array('controller' => 'article_revisions', 'action' => 'index'));
+Router::connect('/articles/add/:slug', array('controller' => 'articles', 'action' => 'add'));
 Router::connect('/:slug', array('controller' => 'articles', 'action' => 'view'), array('persist' => array('slug')));
 Router::connect('/:slug/revision/add', array('controller' => 'articles', 'action' => 'revise'), array('persist' => array('slug')));
 Router::connect('/:slug/revision/view/:id', array('controller' => 'article_revisions', 'action' => 'view'), array('persist' => array('slug')));

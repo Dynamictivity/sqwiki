@@ -21,9 +21,7 @@
                 <td><?php echo h($user['User']['id']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-                <td>
-                    <?php echo h($user['Role']['name']); ?>
-                </td>
+                <td><?php echo h($user['Role']['name']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['article_count']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['article_revision_count']); ?>&nbsp;</td>
                 <td><?php echo h($user['User']['comment_count']); ?>&nbsp;</td>

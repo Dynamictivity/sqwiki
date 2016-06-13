@@ -5,16 +5,21 @@ App::uses('AppController', 'Controller');
  * Comments Controller
  *
  * @property Comment $Comment
+ * @property array paginate
  */
 class CommentsController extends AppController
 {
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         parent::beforeFilter();
         switch (AuthComponent::user('role_id')) {
             case '2':
-                $this->Auth->allow(array('manage_talk', 'manage_add', 'manage_index'));
+                $this->Auth->allow(array('manage_index'));
             case '3':
                 $this->Auth->allow(array('add'));
             default:
@@ -30,7 +35,7 @@ class CommentsController extends AppController
     public function talk()
     {
         if (!empty($this->request->params['slug'])) {
-            $id = $this->Comment->Article->slugToId($this->request->params['slug']);
+            $id = @$this->Comment->Article->slugToId($this->request->params['slug']);
             $this->Comment->Article->id = $id;
             $this->paginate = array(
                 'conditions' => array(
@@ -68,33 +73,13 @@ class CommentsController extends AppController
         if (empty($this->request->params['slug'])) {
             throw new NotFoundException(__('Invalid article'));
         }
-        $article['Article']['id'] = $this->Comment->Article->slugToId($this->request->params['slug']);
+        $article['Article']['id'] = @$this->Comment->Article->slugToId($this->request->params['slug']);
         $this->Comment->Article->id = $article['Article']['id'];
         if (!$this->Comment->Article->exists()) {
             throw new NotFoundException(__('Invalid article'));
         }
         $this->Set(compact('article'));
         $this->render('add');
-    }
-
-    /**
-     * manage_talk method
-     *
-     * @return void
-     */
-    public function manage_talk()
-    {
-        $this->talk();
-    }
-
-    /**
-     * manage_add method
-     *
-     * @return void
-     */
-    public function manage_add()
-    {
-        $this->add();
     }
 
     /**
@@ -106,25 +91,5 @@ class CommentsController extends AppController
     {
         $this->Comment->recursive = 0;
         $this->set('comments', $this->paginate());
-    }
-
-    /**
-     * admin_talk method
-     *
-     * @return void
-     */
-    public function admin_talk()
-    {
-        $this->talk();
-    }
-
-    /**
-     * admin_add method
-     *
-     * @return void
-     */
-    public function admin_add()
-    {
-        $this->add();
     }
 }

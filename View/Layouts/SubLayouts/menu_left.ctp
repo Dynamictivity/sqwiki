@@ -11,7 +11,6 @@
     <h3><?php echo __('%s Navigation', Configure::read('Sqwiki.title')); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Main Page'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Main', 'admin' => false, 'manage' => false)); ?> </li>
-        <!-- <li class="strike"><?php echo $this->Html->link(__('Browse Categories'), array('controller' => 'users', 'action' => 'index', 'admin' => false, 'manage' => false)); ?> </li> -->
         <li><?php echo $this->Html->link(__('Community Portal'), array('controller' => 'articles', 'action' => 'view', 'slug' => 'Portal', 'admin' => false, 'manage' => false)); ?> </li>
         <li><?php echo $this->Html->link(__('Recent Changes'), array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false)); ?> </li>
         <li><?php echo $this->Html->link(__('All Articles'), array('controller' => 'articles', 'action' => 'index', 'sort' => 'title', 'direction' => 'asc', 'admin' => false, 'manage' => false)); ?> </li>
@@ -20,7 +19,6 @@
     <?php if (AuthComponent::user('role_id') == 1) : ?>
         <h3><?php echo __('Administration'); ?></h3>
         <ul>
-            <li><?php echo $this->Html->link(__('Article Revisions'), array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => true, 'manage' => false)); ?> </li>
             <li><?php echo $this->Html->link(__('Users'), array('controller' => 'users', 'action' => 'index', 'admin' => true, 'manage' => false)); ?> </li>
         </ul>
     <?php endif; ?>

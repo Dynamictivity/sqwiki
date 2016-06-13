@@ -5,16 +5,19 @@ App::uses('AppController', 'Controller');
  * Articles Controller
  *
  * @property Article $Article
+ * @property array paginate
  */
 class ArticlesController extends AppController
 {
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         parent::beforeFilter();
         switch (AuthComponent::user('role_id')) {
-            case '2':
-                $this->Auth->allow(array('manage_index', 'manage_view', 'manage_add', 'manage_revise', 'manage_history', 'manage_talk'));
             default:
                 $this->Auth->allow(array('index', 'view', 'add', 'revise', 'history', 'talk'));
         }
@@ -45,25 +48,24 @@ class ArticlesController extends AppController
     /**
      * view method
      *
-     * @return void
+     * @param null $id
+     * @return CakeResponse
      */
     public function view($id = null)
     {
         $slug = null;
         if (!empty($this->request->params['slug'])) {
             $slug = $this->request->params['slug'];
-            $id = $this->Article->slugToId($slug);
+            $id = @$this->Article->slugToId($slug);
         }
         $this->Article->id = $id;
-        $accessLevel = $this->Article->field('role_id');
-        if (!empty($accessLevel) && (AuthComponent::user('role_id') > $accessLevel || AuthComponent::user('role_id') == NULL)) {
-            throw new NotFoundException(__('Invalid article'));
-        }
         if (!$this->Article->exists() || $this->request->is('post')) {
             $this->Flash->set(__('The article does not exist yet'));
-            $this->add();
-            $this->request->data['Article']['title'] = $slug;
-            return $this->render('add');
+            $this->redirect(array('action' => 'add', 'slug' => $slug));
+        }
+        $accessLevel = $this->Article->field('role_id');
+        if (!empty($accessLevel) && (AuthComponent::user('role_id') > $accessLevel || AuthComponent::user('role_id') == null)) {
+            throw new NotFoundException(__('Invalid article'));
         }
         $article = $this->Article->getCurrentVersion($id);
         if (!$article) {
@@ -81,6 +83,10 @@ class ArticlesController extends AppController
      */
     public function add()
     {
+        $slug = null;
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+        }
         if ($this->request->is('post')) {
             $this->Article->create();
             if ($this->Article->saveAssociated($this->request->data)) {
@@ -94,6 +100,7 @@ class ArticlesController extends AppController
             $roles = $this->Article->Role->find('list');
             $this->set(compact('roles'));
         }
+        $this->request->data['Article']['title'] = $slug;
         $this->render('add');
     }
 
@@ -107,7 +114,7 @@ class ArticlesController extends AppController
     {
         if (!empty($this->request->params['slug'])) {
             $slug = $this->request->params['slug'];
-            $id = $this->Article->slugToId($slug);
+            $id = @$this->Article->slugToId($slug);
         }
         $this->Article->id = $id;
         if (!$this->Article->exists()) {
@@ -136,13 +143,13 @@ class ArticlesController extends AppController
     /**
      * history method
      *
-     * @return void
+     * @param null $id
      */
     public function history($id = null)
     {
         if (!empty($this->request->params['slug'])) {
             $slug = $this->request->params['slug'];
-            $id = $this->Article->slugToId($slug);
+            $id = @$this->Article->slugToId($slug);
         }
         $this->Article->id = $id;
         if (!$this->Article->exists()) {
@@ -163,7 +170,7 @@ class ArticlesController extends AppController
     {
         if (!empty($this->request->params['slug'])) {
             $slug = $this->request->params['slug'];
-            $id = $this->Article->slugToId($slug);
+            $id = @$this->Article->slugToId($slug);
         }
         $this->Article->id = $id;
         if (!$this->Article->exists()) {
@@ -173,136 +180,6 @@ class ArticlesController extends AppController
             $slug = $this->Article->field('slug');
         }
         $this->redirect(array('controller' => 'comments', 'action' => 'talk', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false));
-    }
-
-    /**
-     * manage_index method
-     *
-     * @return void
-     */
-    public function manage_index()
-    {
-        $this->index();
-    }
-
-    /**
-     * manage_view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_view($id = null)
-    {
-        $this->view($id);
-    }
-
-    /**
-     * manage_add method
-     *
-     * @return void
-     */
-    public function manage_add()
-    {
-        $this->add();
-    }
-
-    /**
-     * manage_revise method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function manage_revise($id = null)
-    {
-        $this->revise($id);
-    }
-
-    /**
-     * manage_history method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_history($id = null)
-    {
-        $this->history($id);
-    }
-
-    /**
-     * manage_talk method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_talk($id = null)
-    {
-        $this->talk($id);
-    }
-
-    /**
-     * admin_index method
-     *
-     * @return void
-     */
-    public function admin_index()
-    {
-        $this->index();
-    }
-
-    /**
-     * admin_view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_view($id = null)
-    {
-        $this->view($id);
-    }
-
-    /**
-     * admin_add method
-     *
-     * @return void
-     */
-    public function admin_add()
-    {
-        $this->add();
-    }
-
-    /**
-     * admin_revise method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function admin_revise($id = null)
-    {
-        $this->revise($id);
-    }
-
-    /**
-     * admin_history method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_history($id = null)
-    {
-        $this->history($id);
-    }
-
-    /**
-     * admin_talk method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_talk($id = null)
-    {
-        $this->talk($id);
     }
 
     /**

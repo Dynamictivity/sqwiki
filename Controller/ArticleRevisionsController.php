@@ -5,16 +5,21 @@ App::uses('AppController', 'Controller');
  * ArticleRevisions Controller
  *
  * @property ArticleRevision $ArticleRevision
+ * @property array paginate
  */
 class ArticleRevisionsController extends AppController
 {
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         parent::beforeFilter();
         switch (AuthComponent::user('role_id')) {
             case '2':
-                $this->Auth->allow(array('manage_review_queue', 'manage_history', 'manage_view', 'manage_approve', 'manage_reject'));
+                $this->Auth->allow(array('manage_review_queue', 'manage_approve', 'manage_reject'));
             default:
                 $this->Auth->allow(array('index', 'history', 'view'));
         }
@@ -37,7 +42,6 @@ class ArticleRevisionsController extends AppController
         );
         $this->ArticleRevision->recursive = 0;
         $this->set('articleRevisions', $this->paginate());
-        $this->render('history');
     }
 
     /**
@@ -56,7 +60,7 @@ class ArticleRevisionsController extends AppController
             )
         );
         if (!empty($this->request->params['slug'])) {
-            $id = $this->ArticleRevision->Article->slugToId($this->request->params['slug']);
+            $id = @$this->ArticleRevision->Article->slugToId($this->request->params['slug']);
             $this->ArticleRevision->Article->id = $id;
             $this->paginate = array(
                 'conditions' => array(
@@ -76,11 +80,11 @@ class ArticleRevisionsController extends AppController
         }
         $this->ArticleRevision->recursive = 0;
         $this->set('articleRevisions', $this->paginate());
+        $this->render('index');
     }
 
     /**
      * view method
-     * wrapper for admin_view
      *
      * @throws NotFoundException
      * @param string $id
@@ -127,30 +131,6 @@ class ArticleRevisionsController extends AppController
     }
 
     /**
-     * manage_history method
-     * wrapper for admin_history
-     *
-     * @return void
-     */
-    public function manage_history()
-    {
-        $this->history();
-    }
-
-    /**
-     * manage_view method
-     * wrapper for admin_view
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function manage_view($id = null)
-    {
-        $this->view($id);
-    }
-
-    /**
      * manage_approve method
      * wrapper for admin_approve
      *
@@ -175,38 +155,6 @@ class ArticleRevisionsController extends AppController
     public function manage_reject($id = null)
     {
         $this->admin_approve($id, false);
-    }
-
-    /**
-     * admin_index method
-     *
-     * @return void
-     */
-    public function admin_index()
-    {
-        $this->index();
-    }
-
-    /**
-     * admin_history method
-     *
-     * @return void
-     */
-    public function admin_history()
-    {
-        $this->history();
-    }
-
-    /**
-     * admin_view method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function admin_view($id = null)
-    {
-        $this->view($id);
     }
 
     /**
@@ -238,7 +186,7 @@ class ArticleRevisionsController extends AppController
         } else {
             $this->Flash->set(__('The article revision has not been %s due to an error', ($approve ? __('approved') : __('rejected'))));
         }
-        $this->redirect(array('action' => 'view', ++$id, 'manage' => true));
+        $this->redirect(array('action' => 'view', ++$id, 'manage' => false, 'admin' => false));
     }
 
     /**

@@ -15,7 +15,7 @@
         foreach ($articleRevisions as $articleRevision): ?>
             <tr>
                 <td>
-                    <?php echo $this->Html->link($articleRevision['Article']['title'], array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'])); ?>
+                    <?php echo $this->Html->link($articleRevision['Article']['title'], array('controller' => 'articles', 'action' => 'view', $articleRevision['Article']['id'], 'manage' => false)); ?>
                 </td>
                 <td>
                     <?php echo h($articleRevision['User']['username']); ?>
@@ -23,7 +23,7 @@
                 <td><?php echo $this->Time->timeAgoInWords($articleRevision['ArticleRevision']['created']); ?>
                     &nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $articleRevision['ArticleRevision']['id'])); ?>
+                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $articleRevision['ArticleRevision']['id'], 'manage' => false)); ?>
                 </td>
             </tr>
         <?php endforeach; ?>

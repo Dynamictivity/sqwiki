@@ -43,6 +43,10 @@ class AppController extends Controller
         'UiTheme',
     );
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         // Temporary for dev

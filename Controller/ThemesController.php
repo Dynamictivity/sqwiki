@@ -9,6 +9,10 @@ App::uses('AppController', 'Controller');
 class ThemesController extends AppController
 {
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         parent::beforeFilter();
@@ -18,6 +22,9 @@ class ThemesController extends AppController
         }
     }
 
+    /**
+     * set_theme method
+     */
     public function set_theme()
     {
         if (empty($this->request->data['Theme']['selected'])) {
@@ -27,15 +34,5 @@ class ThemesController extends AppController
             $this->Flash->set(__('The theme has been changed to %s', $this->request->data['Theme']['selected']));
             $this->redirect('/');
         }
-    }
-
-    public function manage_set_theme()
-    {
-        $this->set_theme();
-    }
-
-    public function admin_set_theme()
-    {
-        $this->set_theme();
     }
 }
