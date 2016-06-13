@@ -30,7 +30,7 @@ class AppController extends Controller
         'Paginator',
         'SendEMail',
         'Secure',
-//        'Security'
+        'Security'
     );
     public $helpers = array(
         'Html',
@@ -43,6 +43,10 @@ class AppController extends Controller
         'UiTheme',
     );
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         // Temporary for dev

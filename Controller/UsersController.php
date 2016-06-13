@@ -152,6 +152,36 @@ class UsersController extends AppController
     }
 
     /**
+     * login method
+     *
+     * @return void
+     */
+    public function login()
+    {
+        if (AuthComponent::user('id')) {
+            $this->redirect(array('action' => 'view'));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->set(__('Username or password is incorrect.'));
+            }
+        }
+    }
+
+    /**
+     * logout method
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        CakeSession::destroy();
+        $this->redirect($this->Auth->logout());
+    }
+
+    /**
      * admin_index method
      *
      * @return void
@@ -248,35 +278,5 @@ class UsersController extends AppController
         }
         $this->Flash->set(__('User was not deleted'));
         $this->redirect(array('action' => 'index'));
-    }
-
-    /**
-     * login method
-     *
-     * @return void
-     */
-    public function login()
-    {
-        if (AuthComponent::user('id')) {
-            $this->redirect(array('action' => 'view'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirectUrl());
-            } else {
-                $this->Flash->set(__('Username or password is incorrect.'));
-            }
-        }
-    }
-
-    /**
-     * logout method
-     *
-     * @return void
-     */
-    public function logout()
-    {
-        CakeSession::destroy();
-        $this->redirect($this->Auth->logout());
     }
 }

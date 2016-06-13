@@ -28,7 +28,7 @@ sqwiki:
     - SQWIKI_GOOGLE_ANALYTICS_ID=UA-UA-5187184-27
     - SQWIKI_OWNER_EMAIL=sock.puppet@dynamictivity.com
     - SQWIKI_OWNER_USERNAME=sockpuppet
-    - SQWIKI_SLOGAN=the rapid wiki deployment system
+    - SQWIKI_SLOGAN=the squeaky clean wiki
     - SQWIKI_TITLE=Sqwiki
     - 'SQWIKI_URL=http://sqwiki.io'
   image: 'travisrowland/sqwiki:latest'

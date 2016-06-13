@@ -110,7 +110,7 @@ class User extends AppModel
     public function saveNewUser($newUser, $returnExistingUser = true)
     {
         if (empty($newUser['User'])) {
-            $newUser['User'] = $user;
+            $newUser['User'] = $newUser;
         }
         $existingUser = $this->findByEmail($newUser['User']['email']);
         if (!empty($existingUser['User']['email'])) {

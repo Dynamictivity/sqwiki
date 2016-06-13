@@ -5,16 +5,19 @@ App::uses('AppController', 'Controller');
  * Articles Controller
  *
  * @property Article $Article
+ * @property array paginate
  */
 class ArticlesController extends AppController
 {
 
+    /**
+     * beforeFilter method
+     *
+     */
     public function beforeFilter()
     {
         parent::beforeFilter();
         switch (AuthComponent::user('role_id')) {
-            case '2':
-                $this->Auth->allow(array('manage_index', 'manage_view', 'manage_add', 'manage_revise', 'manage_history', 'manage_talk'));
             default:
                 $this->Auth->allow(array('index', 'view', 'add', 'revise', 'history', 'talk'));
         }
@@ -27,31 +30,42 @@ class ArticlesController extends AppController
      */
     public function index()
     {
-        $this->admin_index();
+        $this->paginate = array(
+            'conditions' => array(
+                'OR' => array(
+                    'Article.role_id >=' => AuthComponent::user('role_id'),
+                    'Article.role_id' => null
+                )
+            )
+        );
+        $this->Article->recursive = 0;
+        $this->set('articles', $this->paginate());
+        if (AuthComponent::user('role_id') <= 2) {
+            $this->render('manage_index');
+        }
     }
 
     /**
      * view method
      *
-     * @return void
+     * @param null $id
+     * @return CakeResponse
      */
-    public function view()
+    public function view($id = null)
     {
-        if (empty($this->request->params['slug'])) {
-            throw new NotFoundException(__('Invalid article'));
+        $slug = null;
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+            $id = @$this->Article->slugToId($slug);
         }
-        $slug = $this->request->params['slug'];
-        $id = $this->Article->slugToId($slug);
         $this->Article->id = $id;
-        $accessLevel = $this->Article->field('role_id');
-        if (!empty($accessLevel) && (AuthComponent::user('role_id') > $accessLevel || AuthComponent::user('role_id') == NULL)) {
-            throw new NotFoundException(__('Invalid article'));
-        }
         if (!$this->Article->exists() || $this->request->is('post')) {
             $this->Flash->set(__('The article does not exist yet'));
-            $this->add();
-            $this->request->data['Article']['title'] = $slug;
-            return $this->render('add');
+            $this->redirect(array('action' => 'add', 'slug' => $slug));
+        }
+        $accessLevel = $this->Article->field('role_id');
+        if (!empty($accessLevel) && (AuthComponent::user('role_id') > $accessLevel || AuthComponent::user('role_id') == null)) {
+            throw new NotFoundException(__('Invalid article'));
         }
         $article = $this->Article->getCurrentVersion($id);
         if (!$article) {
@@ -59,7 +73,6 @@ class ArticlesController extends AppController
             $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
         }
         $this->set(compact('article'));
-        $this->render('view');
     }
 
     /**
@@ -69,269 +82,101 @@ class ArticlesController extends AppController
      */
     public function add()
     {
+        $slug = null;
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+        }
         if ($this->request->is('post')) {
             $this->Article->create();
             if ($this->Article->saveAssociated($this->request->data)) {
                 $this->Flash->set(__('The article has been saved'));
-                $this->redirect(array('action' => 'view', 'slug' => $this->Article->field('slug')));
+                $this->redirect(array('action' => 'view', $this->Article->id));
             } else {
                 $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         }
+        if (AuthComponent::user('role_id') <= 2) {
+            $roles = $this->Article->Role->find('list');
+            $this->set(compact('roles'));
+        }
+        $this->request->data['Article']['title'] = $slug;
     }
 
     /**
      * revise method
      *
-     * @throws NotFoundException
-     * @return void
+     * @param null $id
+     * @throws Exception
      */
-    public function revise()
+    public function revise($id = null)
     {
-        if (empty($this->request->params['slug'])) {
-            throw new NotFoundException(__('Invalid article'));
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+            $id = @$this->Article->slugToId($slug);
         }
-        $slug = $this->request->params['slug'];
-        $id = $this->Article->slugToId($slug);
         $this->Article->id = $id;
         if (!$this->Article->exists()) {
             throw new NotFoundException(__('Invalid article'));
         }
+        if (empty($this->request->params['slug'])) {
+            $slug = $this->Article->field('slug');
+        }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Article->saveAssociated($this->request->data)) {
                 $this->Flash->set(__('The article has been saved'));
-                $this->redirect(array('action' => 'view', 'slug' => $slug));
+                $this->redirect(array('action' => 'view', 'slug' => $slug, 'admin' => false, 'manage' => false));
             } else {
                 $this->Flash->set(__('The article could not be saved. Please, try again.'));
             }
         } else {
             $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
         }
-        if (AuthComponent::user('role_id') == 1) {
+        if (AuthComponent::user('role_id') <= 2) {
             $roles = $this->Article->Role->find('list');
             $this->set(compact('roles'));
         }
-        $this->render('revise');
     }
 
     /**
      * history method
      *
-     * @return void
+     * @param null $id
      */
-    public function history()
+    public function history($id = null)
     {
-        if (empty($this->request->params['slug'])) {
-            throw new NotFoundException(__('Invalid article'));
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+            $id = @$this->Article->slugToId($slug);
         }
-        $slug = $this->request->params['slug'];
-        $id = $this->Article->slugToId($slug);
         $this->Article->id = $id;
         if (!$this->Article->exists()) {
             throw new NotFoundException(__('Invalid article'));
         }
-        $this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
+        if (empty($this->request->params['slug'])) {
+            $slug = $this->Article->field('slug');
+        }
+        $this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false));
     }
 
     /**
      * talk method
      *
-     * @return void
+     * @param null $id
      */
-    public function talk()
+    public function talk($id = null)
     {
+        if (!empty($this->request->params['slug'])) {
+            $slug = $this->request->params['slug'];
+            $id = @$this->Article->slugToId($slug);
+        }
+        $this->Article->id = $id;
+        if (!$this->Article->exists()) {
+            throw new NotFoundException(__('Invalid article'));
+        }
         if (empty($this->request->params['slug'])) {
-            throw new NotFoundException(__('Invalid article'));
+            $slug = $this->Article->field('slug');
         }
-        $slug = $this->request->params['slug'];
-        $id = $this->Article->slugToId($slug);
-        $this->Article->id = $id;
-        if (!$this->Article->exists()) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        $this->redirect(array('controller' => 'comments', 'action' => 'talk', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc'));
-    }
-
-    /**
-     * manage_index method
-     *
-     * @return void
-     */
-    public function manage_index()
-    {
-        $this->admin_index();
-    }
-
-    /**
-     * manage_view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_view($id = null)
-    {
-        $this->admin_view($id);
-    }
-
-    /**
-     * manage_add method
-     *
-     * @return void
-     */
-    public function manage_add()
-    {
-        $this->admin_add();
-    }
-
-    /**
-     * manage_revise method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function manage_revise($id = null)
-    {
-        $this->admin_revise($id);
-    }
-
-    /**
-     * manage_history method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_history($id = null)
-    {
-        $this->admin_history($id);
-    }
-
-    /**
-     * manage_talk method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function manage_talk($id = null)
-    {
-        $this->admin_talk($id);
-    }
-
-    /**
-     * admin_index method
-     *
-     * @return void
-     */
-    public function admin_index()
-    {
-        $this->Article->recursive = 0;
-        $this->set('articles', $this->paginate());
-    }
-
-    /**
-     * admin_view method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_view($id = null)
-    {
-        $this->Article->id = $id;
-        if (!$this->Article->exists() || $this->request->is('post')) {
-            $this->Flash->set(__('The article does not exist yet'));
-            $this->admin_add();
-            return $this->render('admin_add');
-        }
-        $article = $this->Article->getCurrentVersion($id);
-        if (!$article) {
-            $this->Flash->set(__('The article has no active revisions'));
-            $this->redirect(array('controller' => 'article_revisions', 'action' => 'index', 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false));
-        }
-        $this->set(compact('article'));
-        $this->render('view');
-    }
-
-    /**
-     * admin_add method
-     *
-     * @return void
-     */
-    public function admin_add()
-    {
-        if ($this->request->is('post')) {
-            $this->Article->create();
-            if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Flash->set(__('The article has been saved'));
-                $this->redirect(array('action' => 'view', $this->Article->id));
-            } else {
-                $this->Flash->set(__('The article could not be saved. Please, try again.'));
-            }
-        }
-        if (AuthComponent::user('role_id') == 1) {
-            $roles = $this->Article->Role->find('list');
-            $this->set(compact('roles'));
-        }
-        $this->render('add');
-    }
-
-    /**
-     * admin_revise method
-     *
-     * @throws NotFoundException
-     * @param string $id
-     * @return void
-     */
-    public function admin_revise($id = null)
-    {
-        $this->Article->id = $id;
-        if (!$this->Article->exists()) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Article->saveAssociated($this->request->data)) {
-                $this->Flash->set(__('The article has been saved'));
-                $this->redirect(array('action' => 'view', $this->Article->id));
-            } else {
-                $this->Flash->set(__('The article could not be saved. Please, try again.'));
-            }
-        } else {
-            $this->request->data = $this->Article->getCurrentVersion($id, array('merge' => false));
-        }
-        if (AuthComponent::user('role_id') == 1) {
-            $roles = $this->Article->Role->find('list');
-            $this->set(compact('roles'));
-        }
-        $this->render('revise');
-    }
-
-    /**
-     * admin_history method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_history($id = null)
-    {
-        $this->Article->id = $id;
-        if (!$this->Article->exists()) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        $this->redirect(array('controller' => 'article_revisions', 'action' => 'history', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
-    }
-
-    /**
-     * admin_talk method
-     *
-     * @param string $id
-     * @return void
-     */
-    public function admin_talk($id = null)
-    {
-        $this->Article->id = $id;
-        if (!$this->Article->exists()) {
-            throw new NotFoundException(__('Invalid article'));
-        }
-        $this->redirect(array('controller' => 'comments', 'action' => 'talk', 'article_id' => $id, 'sort' => 'id', 'direction' => 'desc'));
+        $this->redirect(array('controller' => 'comments', 'action' => 'talk', 'slug' => $slug, 'sort' => 'id', 'direction' => 'desc', 'admin' => false, 'manage' => false));
     }
 
     /**

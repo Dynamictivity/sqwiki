@@ -869,3 +869,9 @@ p.error em {
 #url-rewriting-warning {
     display: none;
 }
+
+span.protected {
+  color: red;
+  font-size: 1.5em;
+  font-weight: bold;
+}
